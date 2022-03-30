@@ -5,8 +5,8 @@ import requests
 # import sys
 # from PyQt5.QtWidgets import QAplication, QWidget
 from datetime import datetime, timedelta
-
 import schedule as schedule
+import time
 
 
 def update():
@@ -27,7 +27,14 @@ def update():
     req = requests.get(url, params=params).json()['mealServiceDietInfo']
 
 
-#schedule.every().day.at("7:00").do(update())
+schedule.every(24).hours.do(update())
+
+while True:
+    schedule.run_pending()
+    time.sleep(1)
+
+
+# schedule.every().day.at("7:00").do(update())
 
 
 def dish(i):
