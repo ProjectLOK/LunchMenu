@@ -15,7 +15,7 @@ params = {'Key': serviceKey,
           'pSize': 5,
           'ATPT_OFCDC_SC_CODE': 'J10',
           'SD_SCHUL_CODE': 7530544,
-          'MLSV_FROM_YMD': date.strftime('%Y%m%d'),
+          'MLSV_FROM_YMD': (date - timedelta(days=1)).strftime('%Y%m%d'),
           'MLSV_TO_YMD': (date + timedelta(days=1)).strftime('%Y%m%d')
           }
 print(params)
@@ -32,15 +32,15 @@ def dish(i):
 
 root = Tk()
 root.title('Diet')
-main = ('Arial', 90)
-small = ('Arial', 20)
+main = ('Arial', 70)
+small = ('Arial', 45)
 
 frm = ttk.Frame(root, padding=20)
+frm.pack(expand=YES, fill=BOTH)
 frm.grid(column=0, row=0)
-ttk.Label(frm, text = '오늘', font=small).grid(column=0, row=0)
-ttk.Label(frm, text = '내일', font=small).grid(column=1, row=0)
-ttk.Label(frm, text=dish(0)['diet'], padding=10, font=main).grid(column=0, row=1)
-ttk.Label(frm, text=dish(1)['diet'], padding=10, font=main, anchor=N).grid(column=1, row=1)
-
-
+ttk.Label(frm, text=date.strftime('%m.%d'), font=small).grid(column=0, row=0)
+ttk.Label(frm, text=(date + timedelta(days=1)).strftime('%m.%d'), font=small).grid(column=2, row=0)
+ttk.Label(frm, text=dish(0)['diet'], padding=10, font=main, anchor=N).grid(column=0, row=1)
+ttk.Label(frm, text='>', padding=10, font=main, anchor=N).grid(column=1, row=1)
+ttk.Label(frm, text=dish(1)['diet'], padding=10, font=main, anchor=N).grid(column=2, row=1)
 root.mainloop()
