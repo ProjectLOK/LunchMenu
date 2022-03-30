@@ -2,24 +2,32 @@ import re
 from tkinter import *
 from tkinter import ttk
 import requests
-#import sys
-#from PyQt5.QtWidgets import QAplication, QWidget
+# import sys
+# from PyQt5.QtWidgets import QAplication, QWidget
 from datetime import datetime, timedelta
 
-date = datetime.today()
-serviceKey = '128332e82a2f42bcbc58d826a24084ce'
-url = 'https://open.neis.go.kr/hub/mealServiceDietInfo'
-params = {'Key': serviceKey,
-          'Type': 'json',
-          'pIndex': 1,
-          'pSize': 5,
-          'ATPT_OFCDC_SC_CODE': 'J10',
-          'SD_SCHUL_CODE': 7530544,
-          'MLSV_FROM_YMD': (date - timedelta(days=1)).strftime('%Y%m%d'),
-          'MLSV_TO_YMD': (date + timedelta(days=1)).strftime('%Y%m%d')
-          }
-print(params)
-req = requests.get(url, params=params).json()['mealServiceDietInfo']
+import schedule as schedule
+
+
+def update():
+    global date, req
+    date = datetime.today()
+    serviceKey = '128332e82a2f42bcbc58d826a24084ce'
+    url = 'https://open.neis.go.kr/hub/mealServiceDietInfo'
+    params = {'Key': serviceKey,
+              'Type': 'json',
+              'pIndex': 1,
+              'pSize': 5,
+              'ATPT_OFCDC_SC_CODE': 'J10',
+              'SD_SCHUL_CODE': 7530544,
+              'MLSV_FROM_YMD': date.strftime('%Y%m%d'),
+              'MLSV_TO_YMD': (date + timedelta(days=2)).strftime('%Y%m%d')
+              }
+    print(params)
+    req = requests.get(url, params=params).json()['mealServiceDietInfo']
+
+
+#schedule.every().day.at("7:00").do(update())
 
 
 def dish(i):
