@@ -20,6 +20,7 @@ query_template = {
         'MLSV_TO_YMD': '',
     }
 
+
 class lunch_api():
     def __init__(self, data=None, date=None, dish=None, cal=None):
         self.api_call()
