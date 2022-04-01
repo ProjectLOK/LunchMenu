@@ -2,9 +2,9 @@ import schedule
 import time
 
 def job():
-    print("I'm working...")
+    print()
 
-schedule.every(10).seconds.do(job)
+schedule.every(3).seconds.do(job)
 
 while True:
     schedule.run_pending()

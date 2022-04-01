@@ -26,10 +26,10 @@ class lunch_api():
         self.api_call()
 
     def api_call(self):
-        self.date = datetime.today()
+        self.req_date = datetime.today()
         query = copy.deepcopy(query_template)
-        query['MLSV_FROM_YMD'] = self.date.strftime('%Y%m%d')
-        query['MLSV_TO_YMD'] = (self.date + timedelta(days=1)).strftime('%Y%m%d')
+        query['MLSV_FROM_YMD'] = self.req_date.strftime('%Y%m%d')
+        query['MLSV_TO_YMD'] = (self.req_date + timedelta(days=3)).strftime('%Y%m%d')
         res = requests.get(url, params=query).json()
 
         try:
@@ -45,6 +45,7 @@ class lunch_api():
             CODE = self.data[0]['head'][1]['RESULT']['CODE']
             MESSAGE = self.data[0]['head'][1]['RESULT']['MESSAGE']
             print('<API CALL SUCCESS> {}: {}'.format(CODE, MESSAGE))
+            self.date = ['']*query['pSize']
             self.dish = ['']*query['pSize']
             self.cal = ['']*query['pSize']
             for i in range(query['pSize']):
@@ -52,3 +53,5 @@ class lunch_api():
                 self.dish[i] = re.sub(r'[0-9*.<br>]+', '', self.dish[i])
                 self.dish[i] = re.sub(r'[/]+', '\n', self.dish[i])
                 self.cal[i] = self.data[1]['row'][i]['CAL_INFO']
+                self.date[i] = self.data[1]['row'][i]['MLSV_YMD']
+                self.date[i] = self.date[i][4:6] + '.' + self.date[i][6:]
