@@ -12,10 +12,13 @@ small = ('Arial', 45)
 
 def GUI():
     lunch = lunch_api()
+    menu1 = StringVar()
+    menu1.set(lunch.dish[0])
+    root.update_idletasks()
     frm = ttk.Frame(root, padding=20)
     date_today = ttk.Label(frm, text=lunch.date[0], font=small)
     date_next = ttk.Label(frm, text=lunch.date[1], font=small)
-    dish_today = ttk.Label(frm, text=lunch.dish[0], padding=10, font=main, anchor=N)
+    dish_today = ttk.Label(frm, textvariable=menu1, padding=10, font=main, anchor=N)
     dish_next = ttk.Label(frm, text=lunch.dish[1], padding=10, font=main, anchor=N)
 
     def display():
@@ -26,18 +29,19 @@ def GUI():
         ttk.Label(frm, text='>', padding=10, font=main, anchor=N).grid(column=1, row=1)
         frm.pack(expand=YES, fill=BOTH)
 
-
-
     def update():
         lunch.api_call()
-        time.sleep(5)
-        dish_today.config(text=lunch.date[0])
-        threading.Timer(10, update).start()
+        menu1.set(lunch.dish[0])
+        root.update_idletasks()
         print("update success")
 
+
     display()
-    update()
-    root.mainloop()
+
+    while True:
+        update()
+
+
 
 GUI()
 

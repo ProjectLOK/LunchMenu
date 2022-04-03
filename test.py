@@ -1,8 +1,6 @@
-import asyncio
+from tkinter import *
 
-
-async def a():
-    await asyncio.sleep(1000)
+root = Tk())
 
 asyncio.run(a())
 print(1)
