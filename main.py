@@ -2,7 +2,7 @@ import time
 from tkinter import *
 from tkinter import ttk
 from scripts.lunch_api import lunch_api
-import threading
+import asyncio
 
 root = Tk()
 root.title('Diet')
@@ -12,13 +12,10 @@ small = ('Arial', 45)
 
 def GUI():
     lunch = lunch_api()
-    menu1 = StringVar()
-    menu1.set(lunch.dish[0])
-    root.update_idletasks()
     frm = ttk.Frame(root, padding=20)
     date_today = ttk.Label(frm, text=lunch.date[0], font=small)
     date_next = ttk.Label(frm, text=lunch.date[1], font=small)
-    dish_today = ttk.Label(frm, textvariable=menu1, padding=10, font=main, anchor=N)
+    dish_today = ttk.Label(frm, text=lunch.dish[0], padding=10, font=main, anchor=N)
     dish_next = ttk.Label(frm, text=lunch.dish[1], padding=10, font=main, anchor=N)
 
     def display():
@@ -31,15 +28,14 @@ def GUI():
 
     def update():
         lunch.api_call()
-        menu1.set(lunch.dish[0])
-        root.update_idletasks()
+        dish_today.configure(text=lunch.dish[0])
+        dish_next.configure(text=lunch.dish[1])
+        root.update()
         print("update success")
 
 
     display()
 
-    while True:
-        update()
 
 
 
