@@ -6,7 +6,7 @@ import threading
 
 
 
-"""class WorkThread(threading, Thread):
+"""class Worker(threading, Thread):
     def __init__(self, menu):
         threading.Thread.__init__(self)
         """
@@ -16,10 +16,9 @@ root = Tk()
 root.title('Diet')
 main = ('Arial', 70)
 small = ('Arial', 45)
-lunch = lunch_api()
 menu1 = StringVar()
-menu1.set(lunch.dish[0])
-root.update_idletasks()
+lunch = lunch_api()
+
 
 frm = ttk.Frame(root, padding=20)
 date_today = ttk.Label(frm, text=lunch.date[0], font=small)
@@ -38,17 +37,12 @@ def display():
 def update():
     lunch = lunch_api()
     menu1.set(lunch.dish[0])
-    root.update_idletasks()
-
     print("api call")
 
-
-while True:
-    update()
-"""
 def loop():
     while True:
-        
+        root.update_idletasks()
+
 t = threading.Timer(10, update)
 
 t.start()
@@ -56,4 +50,3 @@ t.start()
 loop()
 root.mainloop()
 
-"""
