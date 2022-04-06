@@ -6,7 +6,7 @@ import re
 url = 'https://open.neis.go.kr/hub/mealServiceDietInfo'
 serviceKey = '128332e82a2f42bcbc58d826a24084ce'
 ATPT_OFCDC_SC_CODE = 'J10'
-SD_SCHUL_CODE = 7530544
+SD_SCHUL_CODE = '7530544'
 
 query_template = {
         'Key': serviceKey,
