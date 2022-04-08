@@ -1,22 +1,9 @@
-from datetime import datetime, timedelta
-import copy
 import requests
-import re
+import xml.etree.ElementTree as ET
+from xml.etree.ElementTree import Element, dump, ElementTree
 
-url = 'http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst'
-serviceKey = 'AeAcK+vRcfPws0o8ZNy24LcNVm/roD5Ty0exy/86eS0YUcRLanD585e3I/X1IbMJVENlMwoSaUP5Bx6oZCUuLQ=='
-date = datetime.today().strftime('%Y%m%d')
-time = datetime.now().strftime('%H00')
-query_template= {
-    'serviceKey': serviceKey,
-    'numOfRows': '1',
-    'pageNO': '14',
-    'dataType': 'JSON',
-    'base_date': date,
-    'base_time': '1100',
-    'nx': '61',
-    'ny': '134',
-}
+url = 'http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getUltraSrtNcst'
+params ={'serviceKey' : 'AeAcK+vRcfPws0o8ZNy24LcNVm/roD5Ty0exy/86eS0YUcRLanD585e3I/X1IbMJVENlMwoSaUP5Bx6oZCUuLQ==', 'pageNo' : '1', 'numOfRows' : '1000', 'dataType' : 'XML', 'base_date' : '20210628', 'base_time' : '0600', 'nx' : '55', 'ny' : '127' }
 
-res = requests.get(url, params=query_template).json()
-print(res['response'])
+response = requests.get(url, params=params)
+print(response.content)

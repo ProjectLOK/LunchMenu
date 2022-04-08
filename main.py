@@ -3,17 +3,24 @@ from tkinter import *
 from tkinter import ttk
 from scripts.lunch_api import lunch_api
 import asyncio
+from scripts.weather_api import weather_api
 
 root = Tk()
 root.title('Diet')
+root.geometry('1872x1404')
 main = ('Arial', 70)
 small = ('Arial', 45)
 lunch = lunch_api()
+weather = weather_api()
 frm = ttk.Frame(root, padding=20)
 date_today = ttk.Label(frm, text=lunch.date[0], font=small)
 date_next = ttk.Label(frm, text=lunch.date[1], font=small)
 dish_today = ttk.Label(frm, text=lunch.dish[0], padding=10, font=main, anchor=N)
 dish_next = ttk.Label(frm, text=lunch.dish[1], padding=10, font=main, anchor=N)
+tmx_today = ttk.Label(frm, text=weather.tmxtmn['TMX'])
+tmn_today = ttk.Label(frm, text=weather.tmxtmn['TMN'])
+tmx_next = ttk.Label(frm, text=weather.tmxtmn['TMX'])
+tmn_next = ttk.Label(frm, text=weather.tmxtmn['TMN'])
 date_today.grid(column=0, row=0)
 date_next.grid(column=2, row=0)
 dish_today.grid(column=0, row=1)
@@ -44,6 +51,4 @@ async def update():
 if __name__ == '__main__':
     asyncio.run(main())
 
-'''
-# schedule.every().day.at("7:00").do(update)
-'''
+print(weather.tmxtmn['TMX'])
