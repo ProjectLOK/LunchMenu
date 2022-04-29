@@ -45,12 +45,13 @@ class lunch_api():
             CODE = self.data[0]['head'][1]['RESULT']['CODE']
             MESSAGE = self.data[0]['head'][1]['RESULT']['MESSAGE']
             print('<API CALL SUCCESS> {}: {}'.format(CODE, MESSAGE))
+            print(res)
             self.date = ['']*query['pSize']
             self.dish = ['']*query['pSize']
             self.cal = ['']*query['pSize']
             for i in range(query['pSize']):
                 self.dish[i] = self.data[1]['row'][i]['DDISH_NM']
-                self.dish[i] = re.sub(r'[0-9*.<br>]+', '', self.dish[i])
+                self.dish[i] = re.sub(r'[0-9*.<br>()]+', '', self.dish[i])
                 self.dish[i] = re.sub(r'[/]+', '\n', self.dish[i])
                 self.cal[i] = self.data[1]['row'][i]['CAL_INFO']
                 self.date[i] = self.data[1]['row'][i]['MLSV_YMD']

@@ -17,8 +17,8 @@ query_template = {
     'numOfRows': '180',
     'pageNO': '1',
     'dataType': 'JSON',
-    'base_date': '20220408',
-    'base_time': '0200',
+    'base_date': '20220427',
+    'base_time': time_template[0],
     'nx': '61',
     'ny': '134',
 }
@@ -48,25 +48,19 @@ class weather_api():
         query = copy.deepcopy(query_template)
         self.tmxtmn = copy.deepcopy(weather_template)
         self.req_today = date.strftime('%Y%m%d')
-        self.req_next = date + timedelta(days=1).strftime('%Y%m%d')
+        self.req_next = (date + timedelta(days=1)).strftime('%Y%m%d')
         data = copy.deepcopy(weather_template)
         try:
             res = requests.get(url, params=query).json()
         except ConnectionError:
             time.sleep(30)
             self.api_call()
-
-
         try:
             self.raw_data = res['response']['body']['items']['item']
-
         except KeyError:
-
             return 1
-
         except RequestsJSONDecodeError(err):
             print(err)
-
         else:
             for i in range(180):
                 self.tmxtmn[self.raw_data[i]['category']] = self.raw_data[i]['fcstValue']
