@@ -45,7 +45,6 @@ class lunch_api():
             CODE = self.data[0]['head'][1]['RESULT']['CODE']
             MESSAGE = self.data[0]['head'][1]['RESULT']['MESSAGE']
             print('<API CALL SUCCESS> {}: {}'.format(CODE, MESSAGE))
-            print(res)
             self.date = ['']*query['pSize']
             self.dish = ['']*query['pSize']
             self.cal = ['']*query['pSize']

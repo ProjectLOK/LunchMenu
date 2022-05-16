@@ -1,9 +1,27 @@
-fibo = [None]*60
-fibo[0] = 0
-fibo[1] = 1
+import sys
 
-n = int(input())
-for i in range(50):
-    fibo[i + 2] = fibo[i] + fibo[i + 1]
+from PyQt5.QtCore import QSize, Qt
+from PyQt5.QtWidgets import QApplication, QMainWindow, QPushButton
 
-print(fibo[n])
+
+# Subclass QMainWindow to customize your application's main window
+class MainWindow(QMainWindow):
+    def __init__(self):
+        super().__init__()
+
+        self.setWindowTitle("My App")
+
+        button = QPushButton("Press Me!")
+
+        self.setFixedSize(QSize(400, 300))
+
+        # Set the central widget of the Window.
+        self.setCentralWidget(button)
+
+
+app = QApplication(sys.argv)
+
+window = MainWindow()
+window.show()
+
+app.exec()

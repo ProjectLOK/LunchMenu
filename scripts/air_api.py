@@ -17,7 +17,7 @@ query_template = {
     'numOfRows': '180',
     'pageNO': '1',
     'dataType': 'JSON',
-    'base_date': '20220429',
+    'base_date': '20220427',
     'base_time': time_template[0],
     'nx': '61',
     'ny': '134',
@@ -42,11 +42,8 @@ weather_template = {
 
 class weather_api():
     tmxtmn = None
-
     def __init__(self, humidity = None):
         self.api_call()
-        self.req_today, self.req_next, self.raw_data = None, None, None,
-
     def api_call(self):
         query = copy.deepcopy(query_template)
         self.tmxtmn = copy.deepcopy(weather_template)
@@ -57,28 +54,22 @@ class weather_api():
             res = requests.get(url, params=query).json()
         except ConnectionError:
             time.sleep(30)
-            return 1
+            self.api_call()
         try:
             self.raw_data = res['response']['body']['items']['item']
         except KeyError:
             return 1
         except RequestsJSONDecodeError(err):
             print(err)
+        else:
+            for i in range(180):
+                self.tmxtmn[self.raw_data[i]['category']] = self.raw_data[i]['fcstValue']
 
-        # 최고기온, 최저기온만을 위해 쨔여진 코드
-        for i in range(180):
-            self.tmxtmn[self.raw_data[i]['category']] = self.raw_data[i]['fcstValue']
 
-
-'''
-flag = 1
-while flag:
-    flag = api_call()
 api = weather_api()
-'''
-
 
 #Code = res['response']['header']['resultCode']
 #Message = res['response']['header']['resultMsg']
 
 #print('<Weather API CALL Succes> {}: {}'.format(Code, Message))
+
