@@ -19,14 +19,14 @@ class Page(tk.Frame):
 class LunchPage(Page):
     def __init__(self, *args, **kwargs):
         Page.__init__(self, *args, **kwargs)
-        date_today = tk.Label(self, text=lunch.date[0], font=small)
-        date_next = tk.Label(self, text=lunch.date[1], font=small)
-        dish_today = tk.Label(self, text=lunch.dish[0], padding=10, font=main, anchor=N)
-        dish_next = tk.Label(self, text=lunch.dish[1], padding=10, font=main, anchor=N)
-        date_today.grid(column=0, row=0)
-        date_next.grid(column=2, row=0)
-        dish_today.grid(column=0, row=1)
-        dish_next.grid(column=2, row=1)
+        self.date_today = tk.Label(self, text=lunch.date[0], font=small)
+        self.date_next = tk.Label(self, text=lunch.date[1], font=small)
+        self.dish_today = tk.Label(self, text=lunch.dish[0], padding=10, font=main, anchor=N)
+        self.dish_next = tk.Label(self, text=lunch.dish[1], padding=10, font=main, anchor=N)
+        self.date_today.grid(column=0, row=0)
+        self.date_next.grid(column=2, row=0)
+        self.dish_today.grid(column=0, row=1)
+        self.dish_next.grid(column=2, row=1)
         tk.Label(self, text='>', padding=10, font=main, anchor=N).grid(column=1, row=1)
         frm.pack(expand=YES, fill=BOTH)
 

@@ -5,6 +5,9 @@ import aioschedule as sch
 import lunchpage
 import tkinter as tk
 import page_demo
+from scripts.lunch_api import lunch_api
+lunch = lunch_api()
+lp = None
 
 class Page(tk.Frame):
     def __init__(self, *args, **kwargs):
@@ -14,8 +17,8 @@ class Page(tk.Frame):
 
 class MainView(tk.Frame):
     def __init__(self, *args, **kwargs):
+        global lp
         tk.Frame.__init__(self, *args, **kwargs)
-
         buttonframe = tk.Frame(self)
         container = tk.Frame(self)
         buttonframe.pack(side="top", fill="x", expand=False)
@@ -31,10 +34,10 @@ class MainView(tk.Frame):
         lp.show()
 async def update():
     lunch.api_call()
-    dish_today.configure(text=lunch.dish[0])
-    dish_next.configure(text=lunch.dish[1])
-    date_today.configure(text=lunch.date[0])
-    date_next.configure(text=lunch.date[1])
+    lp.dish_today.configure(text=lunch.dish[0])
+    lp.dish_next.configure(text=lunch.dish[1])
+    lp.date_today.configure(text=lunch.date[0])
+    lp.date_next.configure(text=lunch.date[1])
     print("update success")
 
 async def main():
@@ -49,8 +52,8 @@ async def GUI():
 
 if __name__ == "__main__":
     root = tk.Tk()
-    main = MainView(root)
+    view = MainView(root)
     root.geometry('1872x1404')
-    main.pack(side="top", fill="both", expand=True)
+    view.pack(side="top", fill="both", expand=True)
     asyncio.run(main())
     root.mainloop()
