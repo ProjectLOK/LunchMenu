@@ -18,12 +18,15 @@ class Page(tk.Frame):
 class MainView(tk.Frame):
     def __init__(self, *args, **kwargs):
         global lp
+        lp = lunchpage.LunchPage(self)
+
         tk.Frame.__init__(self, *args, **kwargs)
         buttonframe = tk.Frame(self)
+
         container = tk.Frame(self)
         buttonframe.pack(side="top", fill="x", expand=False)
         container.pack(side="top", fill="both", expand=True)
-        lp = lunchpage.LunchPage(self)
+
         lp.place(in_=container, x=0, y=0, relwidth=1, relheight=1)
         b1 = tk.Button(buttonframe, text="급식", command=lp.show)
         b1.pack(side="left")
