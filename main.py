@@ -3,11 +3,13 @@ import asyncio
 from scripts.nWeather_api import weather_api
 import aioschedule as sch
 import lunchpage
+import weatherpage
 import tkinter as tk
 import page_demo
 from scripts.lunch_api import lunch_api
 lunch = lunch_api()
 lp = None
+wp = None
 
 class Page(tk.Frame):
     def __init__(self, *args, **kwargs):
@@ -18,18 +20,22 @@ class Page(tk.Frame):
 class MainView(tk.Frame):
     def __init__(self, *args, **kwargs):
         global lp
+        global wp
         tk.Frame.__init__(self, *args, **kwargs)
         buttonframe = tk.Frame(self)
         container = tk.Frame(self)
         buttonframe.pack(side="top", fill="x", expand=False)
         container.pack(side="top", fill="both", expand=True)
+
         lp = lunchpage.LunchPage(self)
-        lp.place(in_=container, x=0, y=0, relwidth=1, relheight=1)
+        wp = weatherpage.WeatherPage(self)
         b1 = tk.Button(buttonframe, text="급식", command=lp.show)
-        b1.pack(side="left")
-        p2 = page_demo.Page2(self)
-        p2.place(in_=container, x=0, y=0, relwidth=1, relheight=1)
         b2 = tk.Button(buttonframe, text="Page 2", command=p2.show)
+
+        lp.place(in_=container, x=0, y=0, relwidth=1, relheight=1)
+        wp.place(in_=container, x=0, y=0, relwidth=1, relheight=1)
+
+        b1.pack(side="left")
         b2.pack(side="left")
         lp.show()
 async def update():
