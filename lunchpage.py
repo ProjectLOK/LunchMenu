@@ -8,7 +8,7 @@ root = Tk()
 main = ('Arial', 70)
 small = ('Arial', 45)
 lunch = lunch_api()
-frm = tk.Frame(root, padding=20)
+
 class Page(tk.Frame):
     def __init__(self, *args, **kwargs):
         tk.Frame.__init__(self, *args, **kwargs)

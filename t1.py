@@ -1,4 +1,5 @@
-from scripts.lunch_api import lunch_api
-lunch = lunch_api()
+from scripts.nWeather_api import weather_api
 
-print(lunch.dish[0])
+wt = weather_api()
+
+print(wt.min[0])
