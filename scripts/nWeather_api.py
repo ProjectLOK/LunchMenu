@@ -28,7 +28,7 @@ class weather_api():
         query = copy.deepcopy(query_template)
         dttemplate = copy.deepcopy(dt_template)
         res = requests.get(url, params=query).json()
-
+        print('wapi called')
         res['current']['dt'] = (datetime.utcfromtimestamp(res['current']['dt'])).strftime(dttemplate)
         res['current']['sunrise'] = (datetime.utcfromtimestamp(res['current']['sunrise'])).strftime(dttemplate)
         res['current']['sunset'] = (datetime.utcfromtimestamp(res['current']['sunset'])).strftime(dttemplate)
