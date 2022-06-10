@@ -1,9 +1,9 @@
+import tkinter as tk
 import time
 import asyncio
 import aioschedule as sch
 import lunchpage
 import weatherpage
-import tkinter as tk
 from scripts.lunch_api import lunch_api
 from scripts.nWeather_api import weather_api
 lunch = lunch_api()
@@ -30,7 +30,7 @@ class MainView(tk.Frame):
         lp = lunchpage.LunchPage(self)
         wp = weatherpage.WeatherPage(self)
         b1 = tk.Button(buttonframe, text="급식", command=lp.show)
-        b2 = tk.Button(buttonframe, text="Page 2", command=wp.show)
+        b2 = tk.Button(buttonframe, text="날씨", command=wp.show)
 
         lp.place(in_=container, x=0, y=0, relwidth=1, relheight=1)
         wp.place(in_=container, x=0, y=0, relwidth=1, relheight=1)
@@ -42,10 +42,13 @@ class MainView(tk.Frame):
 
 async def update():
     lunch.api_call()
+    wt.api_call()
     lp.dish_today.configure(text=lunch.dish[0])
     lp.dish_next.configure(text=lunch.dish[1])
     lp.date_today.configure(text=lunch.date[0])
     lp.date_next.configure(text=lunch.date[1])
+    wp.min_today.configure(text=wt.min[0])
+    wp.max_today.configure(text=wt.max[1])
     print("update success")
 
 async def main():

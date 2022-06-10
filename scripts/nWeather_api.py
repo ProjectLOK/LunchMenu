@@ -1,4 +1,5 @@
 from datetime import datetime, timedelta
+import matplotlib.pyplot as plt
 import copy
 import requests
 import re
@@ -24,14 +25,15 @@ class weather_api():
         self.max = [None] * 8
         self.api_call()
 
-    def api_call(self, ):
+    def api_call(self):
         query = copy.deepcopy(query_template)
         dttemplate = copy.deepcopy(dt_template)
         res = requests.get(url, params=query).json()
-        print('wapi called')
+        print('Wapi Called')
         res['current']['dt'] = (datetime.utcfromtimestamp(res['current']['dt'])).strftime(dttemplate)
         res['current']['sunrise'] = (datetime.utcfromtimestamp(res['current']['sunrise'])).strftime(dttemplate)
         res['current']['sunset'] = (datetime.utcfromtimestamp(res['current']['sunset'])).strftime(dttemplate)
+        print(res)
         for i in range(8):
             res['daily'][i]['dt'] = (datetime.utcfromtimestamp(res['daily'][i]['dt'])).strftime(dttemplate)
             self.min[i] = res['daily'][i]['temp']['min']

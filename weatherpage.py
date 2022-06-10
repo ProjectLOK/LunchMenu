@@ -1,5 +1,8 @@
-from scripts.nWeather_api import weather_api
 import tkinter as tk
+import gviz_api
+import gviz_data_table
+from scripts.nWeather_api import weather_api
+
 wt = weather_api()
 main = ('Arial', 70)
 small = ('Arial', 45)
@@ -7,6 +10,7 @@ small = ('Arial', 45)
 class Page(tk.Frame):
     def __init__(self, *args, **kwargs):
         tk.Frame.__init__(self, *args, **kwargs)
+
     def show(self):
         self.lift()
 
