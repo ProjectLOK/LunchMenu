@@ -1,30 +1,55 @@
+import tkinter as tk
 import time
-from tkinter import *
-from tkinter import ttk
-from scripts.lunch_api import lunch_api
 import asyncio
-from scripts.nWeather_api import weather_api
 import aioschedule as sch
-
-root = Tk()
-root.title('Diet')
-root.geometry('1872x1404')
-main = ('Arial', 70)
-small = ('Arial', 45)
+import lunchpage
+import weatherpage
+from scripts.lunch_api import lunch_api
+from scripts.nWeather_api import weather_api
 lunch = lunch_api()
-weather = weather_api()
-frm = ttk.Frame(root, padding=20)
-date_today = ttk.Label(frm, text=lunch.date[0], font=small)
-date_next = ttk.Label(frm, text=lunch.date[1], font=small)
-dish_today = ttk.Label(frm, text=lunch.dish[0], padding=10, font=main, anchor=N)
-dish_next = ttk.Label(frm, text=lunch.dish[1], padding=10, font=main, anchor=N)
-date_today.grid(column=0, row=0)
-date_next.grid(column=2, row=0)
-dish_today.grid(column=0, row=1)
-dish_next.grid(column=2, row=1)
-ttk.Label(frm, text='>', padding=10, font=main, anchor=N).grid(column=1, row=1)
-frm.pack(expand=YES, fill=BOTH)
+wt = weather_api()
+lp = None
+wp = None
 
+class Page(tk.Frame):
+    def __init__(self, *args, **kwargs):
+        tk.Frame.__init__(self, *args, **kwargs)
+    def show(self):
+        self.lift()
+
+class MainView(tk.Frame):
+    def __init__(self, *args, **kwargs):
+        global lp
+        global wp
+        tk.Frame.__init__(self, *args, **kwargs)
+        buttonframe = tk.Frame(self)
+        container = tk.Frame(self)
+        buttonframe.pack(side="top", fill="x", expand=False)
+        container.pack(side="top", fill="both", expand=True)
+
+        lp = lunchpage.LunchPage(self)
+        wp = weatherpage.WeatherPage(self)
+        b1 = tk.Button(buttonframe, text="급식", command=lp.show)
+        b2 = tk.Button(buttonframe, text="날씨", command=wp.show)
+
+        lp.place(in_=container, x=0, y=0, relwidth=1, relheight=1)
+        wp.place(in_=container, x=0, y=0, relwidth=1, relheight=1)
+
+        b1.pack(side="left")
+        b2.pack(side="left")
+        lp.show()
+
+
+async def update():
+    lunch.api_call()
+    wt.api_call()
+    lp.dish_today.configure(text=lunch.dish[0])
+    lp.dish_next.configure(text=lunch.dish[1])
+    lp.date_today.configure(text=lunch.date[0])
+    lp.date_next.configure(text=lunch.date[1])
+    wp.min_today.configure(text=wt.min[0])
+    wp.max_today.configure(text=wt.max[1])
+    print("update success")
 
 async def main():
     sch.every().day.at("03:00").do(update)
@@ -36,17 +61,10 @@ async def GUI():
         await sch.run_pending()
         root.update()
 
-
-async def update():
-    lunch.api_call()
-    dish_today.configure(text=lunch.dish[0])
-    dish_next.configure(text=lunch.dish[1])
-    date_today.configure(text=lunch.date[0])
-    date_next.configure(text=lunch.date[1])
-    print("update success")
-
-
-if __name__ == '__main__':
+if __name__ == "__main__":
+    root = tk.Tk()
+    view = MainView(root)
+    root.geometry('1872x1404')
+    view.pack(side="top", fill="both", expand=True)
     asyncio.run(main())
-
-
+    #root.mainloop()
