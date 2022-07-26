@@ -67,4 +67,8 @@ if __name__ == "__main__":
     root.geometry('1872x1404')
     view.pack(side="top", fill="both", expand=True)
     asyncio.run(main())
+
     #root.mainloop()
+
+    root.mainloop()
+

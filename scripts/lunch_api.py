@@ -31,6 +31,7 @@ class lunch_api():
         query['MLSV_FROM_YMD'] = self.req_date.strftime('%Y%m%d')
         query['MLSV_TO_YMD'] = (self.req_date + timedelta(days=3)).strftime('%Y%m%d')
         res = requests.get(url, params=query).json()
+        print(res)
 
         try:
             self.data = res['mealServiceDietInfo']
