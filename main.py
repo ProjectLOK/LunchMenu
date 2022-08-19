@@ -68,7 +68,3 @@ if __name__ == "__main__":
     view.pack(side="top", fill="both", expand=True)
     asyncio.run(main())
 
-    #root.mainloop()
-
-    root.mainloop()
-

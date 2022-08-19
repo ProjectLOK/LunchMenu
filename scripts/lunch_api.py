@@ -51,8 +51,10 @@ class lunch_api():
             self.cal = ['']*query['pSize']
             for i in range(query['pSize']):
                 self.dish[i] = self.data[1]['row'][i]['DDISH_NM']
-                self.dish[i] = re.sub(r'[0-9*.<br>()]+', '', self.dish[i])
+                self.dish[i] = re.sub(r'[0-9*.<br>() ]+', '', self.dish[i])
                 self.dish[i] = re.sub(r'[/]+', '\n', self.dish[i])
                 self.cal[i] = self.data[1]['row'][i]['CAL_INFO']
                 self.date[i] = self.data[1]['row'][i]['MLSV_YMD']
                 self.date[i] = self.date[i][4:6] + '.' + self.date[i][6:]
+
+test = lunch_api()
