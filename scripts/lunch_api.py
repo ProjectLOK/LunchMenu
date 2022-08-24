@@ -56,5 +56,3 @@ class lunch_api():
                 self.cal[i] = self.data[1]['row'][i]['CAL_INFO']
                 self.date[i] = self.data[1]['row'][i]['MLSV_YMD']
                 self.date[i] = self.date[i][4:6] + '.' + self.date[i][6:]
-
-test = lunch_api()

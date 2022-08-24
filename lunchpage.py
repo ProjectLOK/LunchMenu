@@ -1,10 +1,12 @@
 import asyncio
 from tkinter import *
 from tkinter import ttk as tk
+import tkinter.font as tkFont
 from scripts.lunch_api import lunch_api
 root = Tk()
 
 
+#main = tkFont.Font(family='Noto Sans KR Bold', size=70)
 main = ('Arial', 70)
 small = ('Arial', 45)
 lunch = lunch_api()
@@ -25,6 +27,9 @@ class LunchPage(Page):
         dish_today = tk.Label(self, text=lunch.dish[0], padding=10, font=main, borderwidth=2, justify="center")
         dish_next = tk.Label(self, text=lunch.dish[1], padding=10, font=main, borderwidth=2, justify="center")
         arrow = tk.Label(self, text='\n→', padding=25, font=main, borderwidth=2)
+        cal_today = tk.Label(self, text=lunch.cal[0], font=small, justify="center")
+        cal_next = tk.Label(self, text=lunch.cal[1], font=small, justify="center")
+
 
         empty_label.grid(row=0, column=0, rowspan=2, padx=20)
         date_today.grid(row=0, column=1)
@@ -32,5 +37,7 @@ class LunchPage(Page):
         date_next.grid(row=0, column=3)
         dish_today.grid(row=1, column=1)
         dish_next.grid(row=1, column=3)
+        cal_today.grid(row=2, column=1)
+        cal_next.grid(row=2, column=3)
 
 
