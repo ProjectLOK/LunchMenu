@@ -65,6 +65,7 @@ if __name__ == "__main__":
     root = tk.Tk()
     view = MainView(root)
     root.geometry('1872x1404')
+    root.title('Info')
     view.pack(side="top", fill="both", expand=True)
     asyncio.run(main())
 

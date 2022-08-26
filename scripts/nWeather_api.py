@@ -23,7 +23,7 @@ class weather_api():
     def __init__(self):
         self.min = [None]*8
         self.max = [None] * 8
-        self.api_call()
+        #self.api_call()
 
     def api_call(self):
         query = copy.deepcopy(query_template)

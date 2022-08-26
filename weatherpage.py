@@ -4,6 +4,7 @@ import gviz_data_table
 from scripts.nWeather_api import weather_api
 
 wt = weather_api()
+wt.api_call()
 main = ('Arial', 70)
 small = ('Arial', 45)
 

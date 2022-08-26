@@ -22,8 +22,8 @@ query_template = {
 
 
 class lunch_api():
-    def __init__(self, data=None, date=None, dish=None, cal=None):
-        self.api_call()
+  #  def __init__(self, data=None, date=None, dish=None, cal=None):
+   #     self.api_call()
 
     def api_call(self):
         self.req_date = datetime.today()

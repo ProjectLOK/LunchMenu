@@ -10,7 +10,7 @@ root = Tk()
 main = ('Arial', 70)
 small = ('Arial', 45)
 lunch = lunch_api()
-
+lunch.api_call()
 class Page(tk.Frame):
     def __init__(self, *args, **kwargs):
         tk.Frame.__init__(self, *args, **kwargs)
@@ -29,7 +29,6 @@ class LunchPage(Page):
         arrow = tk.Label(self, text='\n→', padding=25, font=main, borderwidth=2)
         cal_today = tk.Label(self, text=lunch.cal[0], font=small, justify="center")
         cal_next = tk.Label(self, text=lunch.cal[1], font=small, justify="center")
-
 
         empty_label.grid(row=0, column=0, rowspan=2, padx=20)
         date_today.grid(row=0, column=1)
