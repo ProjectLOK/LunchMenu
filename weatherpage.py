@@ -1,6 +1,6 @@
 import tkinter as tk
-import gviz_api
-import gviz_data_table
+#import gviz_api
+#import gviz_data_table
 from scripts.nWeather_api import weather_api
 
 wt = weather_api()

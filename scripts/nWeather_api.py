@@ -1,11 +1,11 @@
 from datetime import datetime, timedelta
-import matplotlib.pyplot as plt
+# import matplotlib.pyplot as plt
 import copy
 import requests
-import re
+# import re
 import time
-import pathlib
-import pytz
+# import pathlib
+# import pytz
 
 url = 'https://api.openweathermap.org/data/2.5/onecall?'
 
