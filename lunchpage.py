@@ -33,6 +33,7 @@ lunch.api_call()
 
 class LunchPage(tk.Frame):
     def __init__(self, *args, **kwargs):
+<<<<<<< Updated upstream
         tk.Frame.__init__(self, *args, **kwargs)
         empty_label = tk.Label(self)
         date = time.strftime("%m월 %d일 %a요일")
@@ -50,6 +51,21 @@ class LunchPage(tk.Frame):
         cal_next = tk.Label(lunchframe, text=lunch.cal[1], font=small, justify="center")
 
         empty_label.grid(row=0, column=0, rowspan=2, padx=20) #for left padding
+=======
+        Page.__init__(self, *args, **kwargs)
+        lunchframe = tk.Frame(self)
+        lunchframe.grid(row=0, column=1)
+        empty_label = tk.Label(self)
+        date_today = tk.Label(lunchframe, text=lunch.date[0], font=small)
+        date_next = tk.Label(self, text=lunch.date[1], font=small)
+        dish_today = tk.Label(self, text=lunch.dish[0], padding=10, font=main, justify="center")
+        dish_next = tk.Label(self, text=lunch.dish[1], padding=10, font=main, justify="center")
+        arrow = tk.Label(self, text='\n→', padding=25, font=main)
+        cal_today = tk.Label(self, text=lunch.cal[0], font=small, justify="center")
+        cal_next = tk.Label(self, text=lunch.cal[1], font=small, justify="center")
+
+        empty_label.grid(row=0, column=0, rowspan=2, padx=20)
+>>>>>>> Stashed changes
         date_today.grid(row=0, column=1)
         arrow.grid(rowspan=2, row=0, column=2)
         date_next.grid(row=0, column=3)
