@@ -1,5 +1,5 @@
 {
-    "debug": 1,
+    "debug": 0,
     "fonts": {
         "_comment": "https://docs.python.org/3/library/tkinter.font.html",
         "common": {
@@ -30,17 +30,17 @@
                 "overstrike": 0
             },
             "dish": {
-                "family": "Noto Sans KR Bold",
+                "family": "Noto Sans KR",
                 "size": 106,
-                "weight": "normal",
+                "weight": "bold",
                 "slant": "roman",
                 "underline": 0,
                 "overstrike": 0
             },
             "cal": {
-                "family": "Noto Sans KR Bold",
+                "family": "Noto Sans KR",
                 "size": 60,
-                "weight": "normal",
+                "weight": "bold",
                 "slant": "roman",
                 "underline": 0,
                 "overstrike": 0
@@ -48,17 +48,17 @@
         },
         "nextdaylunch": {
             "dish": {
-                "family": "Noto Sans KR Bold",
+                "family": "Noto Sans KR",
                 "size": 60,
-                "weight": "normal",
+                "weight": "bold",
                 "slant": "roman",
                 "underline": 0,
                 "overstrike": 0
             },
             "cal": {
-                "family": "Noto Sans KR Bold",
+                "family": "Noto Sans KR",
                 "size": 47,
-                "weight": "normal",
+                "weight": "bold",
                 "slant": "roman",
                 "underline": 0,
                 "overstrike": 0
@@ -66,9 +66,9 @@
         },
         "clock": {
             "date": {
-                "family": "Noto Sans KR Bold",
+                "family": "Noto Sans KR",
                 "size": 48,
-                "weight": "normal",
+                "weight": "bold",
                 "slant": "roman",
                 "underline": 0,
                 "overstrike": 0
