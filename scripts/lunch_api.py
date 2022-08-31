@@ -2,6 +2,14 @@ from datetime import datetime, timedelta
 import copy
 import requests
 import re
+import json
+
+with open('config.json', 'r') as config:
+    config = config.read()
+    config = json.loads(config)
+    debug = config['debug']
+__print = print
+print = lambda a: __print(a) if debug else 0
 
 url = 'https://open.neis.go.kr/hub/mealServiceDietInfo'
 serviceKey = '128332e82a2f42bcbc58d826a24084ce'
@@ -22,15 +30,13 @@ query_template = {
 
 
 class lunch_api():
-    def __init__(self, data=None, date=None, dish=None, cal=None):
-        self.api_call()
-
     def api_call(self):
         self.req_date = datetime.today()
         query = copy.deepcopy(query_template)
         query['MLSV_FROM_YMD'] = self.req_date.strftime('%Y%m%d')
         query['MLSV_TO_YMD'] = (self.req_date + timedelta(days=3)).strftime('%Y%m%d')
         res = requests.get(url, params=query).json()
+        print(res)
 
         try:
             self.data = res['mealServiceDietInfo']
@@ -50,7 +56,7 @@ class lunch_api():
             self.cal = ['']*query['pSize']
             for i in range(query['pSize']):
                 self.dish[i] = self.data[1]['row'][i]['DDISH_NM']
-                self.dish[i] = re.sub(r'[0-9*.<br>()]+', '', self.dish[i])
+                self.dish[i] = re.sub(r'[0-9*.<br>() ]+', '', self.dish[i])
                 self.dish[i] = re.sub(r'[/]+', '\n', self.dish[i])
                 self.cal[i] = self.data[1]['row'][i]['CAL_INFO']
                 self.date[i] = self.data[1]['row'][i]['MLSV_YMD']
