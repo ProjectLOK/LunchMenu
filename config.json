@@ -1,12 +1,13 @@
 {
-    "_comment": "https://docs.python.org/3/library/tkinter.font.html",
+    "debug": 1,
     "fonts": {
+        "_comment": "https://docs.python.org/3/library/tkinter.font.html",
         "common": {
             "empty": {
                 "family": "",
                 "size": 0,
-                "weight": "",
-                "slant": "",
+                "weight": "normal",
+                "slant": "roman",
                 "underline": 0,
                 "overstrike": 0
             },
@@ -19,28 +20,46 @@
                 "size": "45"
             }
         },
-        "lunch": {
+        "todaylunch": {
             "title": {
                 "family": "Gothic A1 Bold",
                 "size": 47,
-                "weight": "",
-                "slant": "",
+                "weight": "normal",
+                "slant": "roman",
                 "underline": 0,
                 "overstrike": 0
             },
             "dish": {
                 "family": "Noto Sans KR Bold",
                 "size": 106,
-                "weight": "",
-                "slant": "",
+                "weight": "normal",
+                "slant": "roman",
                 "underline": 0,
                 "overstrike": 0
             },
-            "calories": {
+            "cal": {
                 "family": "Noto Sans KR Bold",
                 "size": 60,
-                "weight": "",
-                "slant": "",
+                "weight": "normal",
+                "slant": "roman",
+                "underline": 0,
+                "overstrike": 0
+            }
+        },
+        "nextdaylunch": {
+            "dish": {
+                "family": "Noto Sans KR Bold",
+                "size": 60,
+                "weight": "normal",
+                "slant": "roman",
+                "underline": 0,
+                "overstrike": 0
+            },
+            "cal": {
+                "family": "Noto Sans KR Bold",
+                "size": 47,
+                "weight": "normal",
+                "slant": "roman",
                 "underline": 0,
                 "overstrike": 0
             }
@@ -49,16 +68,16 @@
             "date": {
                 "family": "Noto Sans KR Bold",
                 "size": 48,
-                "weight": "",
-                "slant": "",
+                "weight": "normal",
+                "slant": "roman",
                 "underline": 0,
                 "overstrike": 0
             },
             "time": {
                 "family": "Noto Sans KR Medium",
                 "size": 230,
-                "weight": "",
-                "slant": "",
+                "weight": "normal",
+                "slant": "roman",
                 "underline": 0,
                 "overstrike": 0
             }
@@ -67,24 +86,24 @@
             "category": {
                 "family": "Gothic A1 Bold",
                 "size": 41.35,
-                "weight": "",
-                "slant": "",
+                "weight": "normal",
+                "slant": "roman",
                 "underline": 0,
                 "overstrike": 0
             },
             "data": {
                 "family": "Gothic A1 Bold",
                 "size": 62.54,
-                "weight": "",
-                "slant": "",
+                "weight": "normal",
+                "slant": "roman",
                 "underline": 0,
                 "overstrike": 0
             },
             "unit": {
                 "family": "Gothic A1 Bold",
                 "size": 45,
-                "weight": "",
-                "slant": "",
+                "weight": "normal",
+                "slant": "roman",
                 "underline": 0,
                 "overstrike": 0
             }
