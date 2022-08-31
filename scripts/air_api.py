@@ -42,8 +42,6 @@ weather_template = {
 
 class weather_api():
     tmxtmn = None
-    def __init__(self, humidity = None):
-        self.api_call()
     def api_call(self):
         query = copy.deepcopy(query_template)
         self.tmxtmn = copy.deepcopy(weather_template)
@@ -64,12 +62,3 @@ class weather_api():
         else:
             for i in range(180):
                 self.tmxtmn[self.raw_data[i]['category']] = self.raw_data[i]['fcstValue']
-
-
-api = weather_api()
-
-#Code = res['response']['header']['resultCode']
-#Message = res['response']['header']['resultMsg']
-
-#print('<Weather API CALL Succes> {}: {}'.format(Code, Message))
-

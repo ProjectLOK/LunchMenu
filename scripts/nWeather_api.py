@@ -1,11 +1,16 @@
 from datetime import datetime, timedelta
-# import matplotlib.pyplot as plt
 import copy
 import requests
-# import re
 import time
-# import pathlib
-# import pytz
+import json
+
+with open('config.json', 'r') as config:
+    config = config.read()
+    config = json.loads(config)
+    debug = config['debug']
+temp = print
+print = lambda a: temp(a) if debug else 0
+del temp
 
 url = 'https://api.openweathermap.org/data/2.5/onecall?'
 

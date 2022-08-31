@@ -2,6 +2,15 @@ from datetime import datetime, timedelta
 import copy
 import requests
 import re
+import json
+
+with open('config.json', 'r') as config:
+    config = config.read()
+    config = json.loads(config)
+    debug = config['debug']
+temp = print
+print = lambda a: temp(a) if debug else 0
+del temp
 
 url = 'https://open.neis.go.kr/hub/mealServiceDietInfo'
 serviceKey = '128332e82a2f42bcbc58d826a24084ce'
@@ -22,9 +31,6 @@ query_template = {
 
 
 class lunch_api():
-  #  def __init__(self, data=None, date=None, dish=None, cal=None):
-   #     self.api_call()
-
     def api_call(self):
         self.req_date = datetime.today()
         query = copy.deepcopy(query_template)
