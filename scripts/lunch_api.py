@@ -8,9 +8,8 @@ with open('config.json', 'r') as config:
     config = config.read()
     config = json.loads(config)
     debug = config['debug']
-temp = print
-print = lambda a: temp(a) if debug else 0
-del temp
+__print = print
+print = lambda a: __print(a) if debug else 0
 
 url = 'https://open.neis.go.kr/hub/mealServiceDietInfo'
 serviceKey = '128332e82a2f42bcbc58d826a24084ce'
