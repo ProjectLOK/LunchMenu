@@ -8,9 +8,8 @@ with open('config.json', 'r') as config:
     config = config.read()
     config = json.loads(config)
     debug = config['debug']
-temp = print
-print = lambda a: temp(a) if debug else 0
-del temp
+__print = print
+print = lambda a: __print(a) if debug else 0
 
 url = 'https://api.openweathermap.org/data/2.5/onecall?'
 

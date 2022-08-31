@@ -3,6 +3,14 @@ import copy
 import requests
 import re
 import time
+import json
+
+with open('config.json', 'r') as config:
+    config = config.read()
+    config = json.loads(config)
+    debug = config['debug']
+__print = print
+print = lambda a: __print(a) if debug else 0
 
 url = 'http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst'
 serviceKey = 'AeAcK+vRcfPws0o8ZNy24LcNVm/roD5Ty0exy/86eS0YUcRLanD585e3I/X1IbMJVENlMwoSaUP5Bx6oZCUuLQ=='
