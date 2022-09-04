@@ -2,3 +2,4 @@
 .idea/misc.xml
 __pycache__
 temp.py
+.DS_Store
