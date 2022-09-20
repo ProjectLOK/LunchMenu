@@ -1,5 +1,5 @@
 {
-    "debug": 1,
+    "debug": 0,
     "fonts": {
         "_comment": "https://docs.python.org/3/library/tkinter.font.html",
         "common": {
@@ -85,7 +85,7 @@
         "sensor": {
             "category": {
                 "family": "Gothic A1 Bold",
-                "size": 41.35,
+                "size": 41,
                 "weight": "normal",
                 "slant": "roman",
                 "underline": 0,
@@ -93,7 +93,7 @@
             },
             "data": {
                 "family": "Gothic A1 Bold",
-                "size": 62.54,
+                "size": 63,
                 "weight": "normal",
                 "slant": "roman",
                 "underline": 0,

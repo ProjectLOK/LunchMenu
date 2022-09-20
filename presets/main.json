@@ -1,0 +1,62 @@
+{   "_comment": "",
+    "composition": [
+        {
+            "class": "TodayLunch",
+            "name": "today_lunch",
+            "master": "root",
+            "kwargs": {
+                "anchor": "NW",
+                "bordermode": "INSIDE",
+                "orientation": {
+                    "width": 927,
+                    "height": 944,
+                    "x": 27,
+                    "y": 138
+                }
+
+            }
+        }, {
+            "class": "NextdayLunch",
+            "name": "nextday_lunch",
+            "master": "root",
+            "kwargs": {
+                "anchor": "NW",
+                "bordermode": "INSIDE",
+                "orientation": {
+                    "width": 438,
+                    "height": 599,
+                    "x": 978,
+                    "y": 483
+                }
+            }
+        }, {
+            "class": "Clock",
+            "name": "clock",
+            "master": "root",
+            "kwargs": {
+                "anchor": "NW",
+                "bordermode": "INSIDE",
+                "orientation": {
+                    "width": 874.23,
+                    "height": 317.5,
+                    "x": 978,
+                    "y": 139
+                }
+            }
+        }, {
+            "class": "Sensor",
+            "name": "sensor",
+            "master": "root",
+            "kwargs": {
+                "anchor": "NW",
+                "bordermode": "INSIDE",
+                "orientation": {
+                    "width": 437.115,
+                    "height": 408,
+                    "x": 1445,
+                    "y": 483
+                }
+            }
+        }
+    ]
+}
