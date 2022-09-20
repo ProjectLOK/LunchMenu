@@ -1,37 +1,35 @@
 from datetime import datetime, timedelta
-import copy
 import requests
-import re
 import time
 import json
 
-with open('config.json', 'r') as config:
-    config = config.read()
+with open('config.json', 'r') as data:
+    config = data.read()
+    data.close()
     config = json.loads(config)
     debug = config['debug']
 __print = print
 print = lambda a: __print(a) if debug else 0
-
-url = 'http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst'
-serviceKey = 'AeAcK+vRcfPws0o8ZNy24LcNVm/roD5Ty0exy/86eS0YUcRLanD585e3I/X1IbMJVENlMwoSaUP5Bx6oZCUuLQ=='
+URL = 'http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst'
+SERVICE_KEY = 'AeAcK+vRcfPws0o8ZNy24LcNVm/roD5Ty0exy/86eS0YUcRLanD585e3I/X1IbMJVENlMwoSaUP5Bx6oZCUuLQ=='
 date = datetime.today()
 curr_time = datetime.now().strftime('%H')
-time_template = ['0200', '0500', '0800', '1100', '1400', '1700', '2000', '2300']
-req_time = time_template[int(curr_time)//3]
+TIME_TEMPLATE = ['0200', '0500', '0800', '1100', '1400', '1700', '2000', '2300']
+req_time = TIME_TEMPLATE[int(curr_time)//3]
 
 
-query_template = {
-    'serviceKey': serviceKey,
+QUERY_TEMPLATE = {
+    'serviceKey': SERVICE_KEY,
     'numOfRows': '180',
     'pageNO': '1',
     'dataType': 'JSON',
     'base_date': '20220427',
-    'base_time': time_template[0],
+    'base_time': TIME_TEMPLATE[0],
     'nx': '61',
     'ny': '134',
 }
 
-weather_template = {
+WEATHER_TEMPLATE = {
     'POP': None,
     'PCP': None,
     'REH': None,
@@ -49,15 +47,16 @@ weather_template = {
 
 
 class weather_api():
-    tmxtmn = None
+    def __init__(self):
+        self.query = dict(QUERY_TEMPLATE)
+        self.tmxtmn = dict(WEATHER_TEMPLATE)
+        data = dict(WEATHER_TEMPLATE)
+
     def api_call(self):
-        query = copy.deepcopy(query_template)
-        self.tmxtmn = copy.deepcopy(weather_template)
         self.req_today = date.strftime('%Y%m%d')
         self.req_next = (date + timedelta(days=1)).strftime('%Y%m%d')
-        data = copy.deepcopy(weather_template)
         try:
-            res = requests.get(url, params=query).json()
+            res = requests.get(URL, params=self.query).json()
         except ConnectionError:
             time.sleep(30)
             self.api_call()
@@ -65,8 +64,6 @@ class weather_api():
             self.raw_data = res['response']['body']['items']['item']
         except KeyError:
             return 1
-        except RequestsJSONDecodeError(err):
-            print(err)
         else:
             for i in range(180):
                 self.tmxtmn[self.raw_data[i]['category']] = self.raw_data[i]['fcstValue']

@@ -1,19 +1,18 @@
-from datetime import datetime, timedelta
-import copy
+from datetime import datetime
 import requests
-import time
 import json
 
-with open('config.json', 'r') as config:
-    config = config.read()
+with open('config.json', 'r') as data:
+    config = data.read()
+    data.close()
     config = json.loads(config)
     debug = config['debug']
 __print = print
 print = lambda a: __print(a) if debug else 0
 
-url = 'https://api.openweathermap.org/data/2.5/onecall?'
+URL = 'https://api.openweathermap.org/data/2.5/onecall?'
 
-query_template = {
+QUERY_TEMPLATE = {
     'appid': '12934e34e68da8ef0415c09031f4bfd2',
     'lat': '37.9149',
     'lon': '127.0667',
@@ -21,25 +20,25 @@ query_template = {
     'exclude': 'minutely,hourly',
     'lang': 'eng'
 }
-dt_template = ('%y%m%d, %H:%M:%S')
+DT_TEMPLATE = '%y%m%d, %H:%M:%S'
 
 class weather_api():
     def __init__(self):
         self.min = [None]*8
         self.max = [None] * 8
-        #self.api_call()
+        self.query = dict(QUERY_TEMPLATE)
+        self.dt = str(DT_TEMPLATE)
+        self.res = requests.get(URL, params=self.query).json()
 
     def api_call(self):
-        query = copy.deepcopy(query_template)
-        dttemplate = copy.deepcopy(dt_template)
-        res = requests.get(url, params=query).json()
+        
         print('Wapi Called')
-        res['current']['dt'] = (datetime.utcfromtimestamp(res['current']['dt'])).strftime(dttemplate)
-        res['current']['sunrise'] = (datetime.utcfromtimestamp(res['current']['sunrise'])).strftime(dttemplate)
-        res['current']['sunset'] = (datetime.utcfromtimestamp(res['current']['sunset'])).strftime(dttemplate)
-        print(res)
+        self.res['current']['dt'] = (datetime.utcfromtimestamp(self.res['current']['dt'])).strftime(self.dt)
+        self.res['current']['sunrise'] = (datetime.utcfromtimestamp(self.res['current']['sunrise'])).strftime(self.dt)
+        self.res['current']['sunset'] = (datetime.utcfromtimestamp(self.res['current']['sunset'])).strftime(self.dt)
+        print(self.res)
         for i in range(8):
-            res['daily'][i]['dt'] = (datetime.utcfromtimestamp(res['daily'][i]['dt'])).strftime(dttemplate)
-            self.min[i] = res['daily'][i]['temp']['min']
-            self.max[i] = res['daily'][i]['temp']['max']
+            self.res['daily'][i]['dt'] = (datetime.utcfromtimestamp(self.res['daily'][i]['dt'])).strftime(self.dt)
+            self.min[i] = self.res['daily'][i]['temp']['min']
+            self.max[i] = self.res['daily'][i]['temp']['max']
 

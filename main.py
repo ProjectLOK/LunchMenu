@@ -1,6 +1,6 @@
 import tkinter as tk
 import asyncio
-import widgets
+import widget_manager
 import json
 
 async def main():
@@ -8,12 +8,14 @@ async def main():
     root.title('Lunch Menu') 
     root.geometry('1872x1404')
     root.resizable(False, False)
-    today_lunch = widgets.TodayLunch(root)
-    clock = widgets.Clock(root)
-    nextday_lunch = widgets.NextdayLunch(root)
-    today_lunch.grid(row=0, rowspan=2, column=0)
-    clock.grid(row=0, column=1, columnspan=2)
-    nextday_lunch.grid(row=1, column=1)
+    root.attributes('-fullscreen', True)
+
+    with open('presets/main.json', 'r') as data:
+        preset_main = json.loads(data.read())["composition"]
+        data.close()
+
+    manager = widget_manager.WidgetManager(root)
+    manager.load(preset_main)
 
     while True:
         root.update()
