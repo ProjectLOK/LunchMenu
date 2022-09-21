@@ -8,8 +8,8 @@
                 "anchor": "NW",
                 "bordermode": "INSIDE",
                 "orientation": {
-                    "width": 927,
-                    "height": 944,
+                    "width": 1000,
+                    "height": 1100,
                     "x": 27,
                     "y": 138
                 }
@@ -25,7 +25,7 @@
                 "orientation": {
                     "width": 438,
                     "height": 599,
-                    "x": 978,
+                    "x": 27,
                     "y": 483
                 }
             }
@@ -52,7 +52,7 @@
                 "bordermode": "INSIDE",
                 "orientation": {
                     "width": 437.115,
-                    "height": 408,
+                    "height": 570,
                     "x": 1445,
                     "y": 483
                 }

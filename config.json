@@ -6,8 +6,8 @@
             "empty": {
                 "family": "",
                 "size": 0,
-                "weight": "normal",
-                "slant": "roman",
+                "weight": "NORMAL",
+                "slant": "ROMAN",
                 "underline": 0,
                 "overstrike": 0
             },
@@ -24,24 +24,24 @@
             "title": {
                 "family": "Gothic A1 Bold",
                 "size": 47,
-                "weight": "normal",
-                "slant": "roman",
+                "weight": "NORMAL",
+                "slant": "ROMAN",
                 "underline": 0,
                 "overstrike": 0
             },
             "dish": {
                 "family": "Noto Sans KR",
                 "size": 106,
-                "weight": "bold",
-                "slant": "roman",
+                "weight": "BOLD",
+                "slant": "ROMAN",
                 "underline": 0,
                 "overstrike": 0
             },
             "cal": {
                 "family": "Noto Sans KR",
                 "size": 60,
-                "weight": "bold",
-                "slant": "roman",
+                "weight": "BOLD",
+                "slant": "ROMAN",
                 "underline": 0,
                 "overstrike": 0
             }
@@ -50,16 +50,16 @@
             "dish": {
                 "family": "Noto Sans KR",
                 "size": 60,
-                "weight": "bold",
-                "slant": "roman",
+                "weight": "BOLD",
+                "slant": "ROMAN",
                 "underline": 0,
                 "overstrike": 0
             },
             "cal": {
                 "family": "Noto Sans KR",
                 "size": 47,
-                "weight": "bold",
-                "slant": "roman",
+                "weight": "BOLD",
+                "slant": "ROMAN",
                 "underline": 0,
                 "overstrike": 0
             }
@@ -68,16 +68,16 @@
             "date": {
                 "family": "Noto Sans KR",
                 "size": 48,
-                "weight": "bold",
-                "slant": "roman",
+                "weight": "BOLD",
+                "slant": "ROMAN",
                 "underline": 0,
                 "overstrike": 0
             },
             "time": {
                 "family": "Noto Sans KR Medium",
                 "size": 230,
-                "weight": "normal",
-                "slant": "roman",
+                "weight": "NORMAL",
+                "slant": "ROMAN",
                 "underline": 0,
                 "overstrike": 0
             }
@@ -86,24 +86,24 @@
             "category": {
                 "family": "Gothic A1 Bold",
                 "size": 41,
-                "weight": "normal",
-                "slant": "roman",
+                "weight": "NORMAL",
+                "slant": "ROMAN",
                 "underline": 0,
                 "overstrike": 0
             },
             "data": {
                 "family": "Gothic A1 Bold",
                 "size": 63,
-                "weight": "normal",
-                "slant": "roman",
+                "weight": "NORMAL",
+                "slant": "ROMAN",
                 "underline": 0,
                 "overstrike": 0
             },
             "unit": {
                 "family": "Gothic A1 Bold",
                 "size": 45,
-                "weight": "normal",
-                "slant": "roman",
+                "weight": "NORMAL",
+                "slant": "ROMAN",
                 "underline": 0,
                 "overstrike": 0
             }

@@ -7,9 +7,10 @@ async def main():
     root = tk.Tk()
     root.title('Lunch Menu') 
     root.geometry('1872x1404')
-    root.resizable(False, False)
-    root.attributes('-fullscreen', True)
-
+    root.attributes('-transparent', False)
+    root.configure(background='white')
+    #root.resizable(False, False)
+    #root.attributes('-fullscreen', True)
     with open('presets/main.json', 'r') as data:
         preset_main = json.loads(data.read())["composition"]
         data.close()

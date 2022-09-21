@@ -19,6 +19,10 @@ def class_name(self):
     return re.sub(r'[.!]+', '', str(self))
 
 def pack_font(data):
+    if "weight" in data.keys():
+        data["weight"] = getattr(tk.font, data["weight"])
+    if "slant" in data.keys():
+        data["slant"] = getattr(tk.font, data["slant"])
     return tk.font.Font(**data)
 
 class LunchData:
@@ -51,6 +55,7 @@ class TodayLunch(tk.Frame):
         title.                  grid(row=0, column=0)
         dish_label.             grid(row=1, column=0)
         cal_label.              grid(row=2, column=0)
+        self.                   config(relief='solid', bd=10)
 
     async def update(self):
         while True:
@@ -73,6 +78,7 @@ class NextdayLunch(tk.Frame):
 
         dish_label.             grid(row=0, column=0)
         cal_label.              grid(row=1, column=0)
+        self.config(relief='solid', bd=10)
 
     async def update(self):
         while True:
@@ -125,16 +131,17 @@ class Sensor(tk.Frame):
 
         frame_air.              grid(row=0, column=0, columnspan=3)
         category_fine.          grid(row=1, column=0, columnspan=2)
-        unit_fine.              grid(row=2, column=0)
-        data_fine.              grid(row=2, column=1)
+        data_fine.              grid(row=2, column=0)
+        unit_fine.              grid(row=2, column=1)
         lamp_fine
         category_ultrafine.     grid(row=3, column=0, columnspan=2)
-        unit_ultrafine.         grid(row=4, column=0)
-        data_ultrafine.         grid(row=4, column=1)
+        data_ultrafine.         grid(row=4, column=0)
+        unit_ultrafine.         grid(row=4, column=1)
+
         lamp_ultrafine
         category_co2.           grid(row=5, column=0, columnspan=2)
-        unit_co2.               grid(row=6, column=0)
-        data_co2.               grid(row=6, column=1)
+        data_co2.               grid(row=6, column=0)
+        unit_co2.               grid(row=6, column=1)
         lamp_co2
 
     async def update(self):
@@ -161,6 +168,7 @@ class Clock(tk.Frame):
 
         date_label.             grid(row=0, column=0)
         time_label.             grid(row=1, column=0)
+        self.config(relief='solid', bd=10)
         
     async def update(self):
         while True:
