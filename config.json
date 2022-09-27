@@ -31,7 +31,7 @@
             },
             "dish": {
                 "family": "Noto Sans KR",
-                "size": 106,
+                "size": 75,
                 "weight": "BOLD",
                 "slant": "ROMAN",
                 "underline": 0,
@@ -75,7 +75,7 @@
             },
             "time": {
                 "family": "Noto Sans KR Medium",
-                "size": 230,
+                "size": 110,
                 "weight": "NORMAL",
                 "slant": "ROMAN",
                 "underline": 0,
