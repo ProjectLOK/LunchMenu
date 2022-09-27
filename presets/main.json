@@ -8,8 +8,8 @@
                 "anchor": "NW",
                 "bordermode": "INSIDE",
                 "orientation": {
-                    "width": 1000,
-                    "height": 1100,
+                    "width": 895,
+                    "height": 1200,
                     "x": 27,
                     "y": 138
                 }
@@ -23,10 +23,10 @@
                 "anchor": "NW",
                 "bordermode": "INSIDE",
                 "orientation": {
-                    "width": 438,
-                    "height": 599,
-                    "x": 27,
-                    "y": 483
+                    "width": 434,
+                    "height": 856,
+                    "x": 949,
+                    "y": 446
                 }
             }
         }, {
@@ -37,9 +37,9 @@
                 "anchor": "NW",
                 "bordermode": "INSIDE",
                 "orientation": {
-                    "width": 874.23,
-                    "height": 317.5,
-                    "x": 978,
+                    "width": 895,
+                    "height": 450,
+                    "x": 949,
                     "y": 139
                 }
             }
@@ -51,9 +51,9 @@
                 "anchor": "NW",
                 "bordermode": "INSIDE",
                 "orientation": {
-                    "width": 437.115,
-                    "height": 570,
-                    "x": 1445,
+                    "width": 434,
+                    "height": 856,
+                    "x": 1410,
                     "y": 483
                 }
             }

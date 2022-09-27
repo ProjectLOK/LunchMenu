@@ -48,9 +48,9 @@ class TodayLunch(tk.Frame):
         font_dish =             pack_font(fonts[class_name(self)]['dish'])
         font_cal =              pack_font(fonts[class_name(self)]['cal'])
 
-        title =                 tk.Label(self,          text='오늘 급식',               font=font_title)
-        dish_label =            tk.Label(self,          textvariable=self.dish,         font=font_dish)
-        cal_label =             tk.Label(self,          textvariable=self.cal,          font=font_cal)
+        title =                 tk.Label(self,          text='오늘 급식',               font=font_title, anchor='center',relief='solid', bd=2)
+        dish_label =            tk.Label(self,          textvariable=self.dish,         font=font_dish, anchor='center', relief='solid', bd=2)
+        cal_label =             tk.Label(self,          textvariable=self.cal,          font=font_cal, anchor='center',relief='solid', bd=2)
 
         title.                  grid(row=0, column=0)
         dish_label.             grid(row=1, column=0)
@@ -73,8 +73,8 @@ class NextdayLunch(tk.Frame):
         dish_font =             pack_font(fonts[class_name(self)]['dish'])
         cal_font =              pack_font(fonts[class_name(self)]['cal'])
 
-        dish_label =            tk.Label(self,          textvariable=self.dish,         font=dish_font)
-        cal_label =             tk.Label(self,          textvariable=self.cal,          font=cal_font)
+        dish_label =            tk.Label(self,          textvariable=self.dish,         font=dish_font, anchor='center')
+        cal_label =             tk.Label(self,          textvariable=self.cal,          font=cal_font, anchor='center')
 
         dish_label.             grid(row=0, column=0)
         cal_label.              grid(row=1, column=0)
@@ -102,7 +102,7 @@ class Sensor(tk.Frame):
 
         frame_air =             tk.Frame(self)
 
-        category_air =          tk.Label(frame_air,     text="온습도",                  font=category_font,     justify=tk.LEFT)
+        category_air =          tk.Label(frame_air,     text="AIR",                  font=category_font,     justify=tk.LEFT, anchor='w')
         data_temperature =      tk.Label(frame_air,     textvariable=self.temperature,  font=data_font)
         unit_celcius =          tk.Label(frame_air,     text="°C",                      font=unit_font)
         split_bar =             tk.Label(frame_air,     text="|",                       font=category_font)
@@ -116,7 +116,7 @@ class Sensor(tk.Frame):
         data_humidity.          grid(row=1, column=3)
         not_unit_percent.       grid(row=1, column=4)
 
-        category_fine =         tk.Label(self,          text="미세먼지",                font=category_font,     justify=tk.LEFT)
+        category_fine =         tk.Label(self,          text="미세먼지",                font=category_font,     justify=tk.LEFT, anchor='w')
         unit_fine =             tk.Label(self,          text="μg/m³",                   font=unit_font,         justify=tk.RIGHT)
         data_fine =             tk.Label(self,          textvariable=self.fine,         font=data_font,         justify=tk.LEFT)
         lamp_fine =             placeholder
@@ -163,11 +163,11 @@ class Clock(tk.Frame):
         font_date = pack_font(fonts[class_name(self)]['date'])
         font_time = pack_font(fonts[class_name(self)]['time'])
 
-        date_label =            tk.Label(self,          textvariable=self.date,         font=font_date)
-        time_label =            tk.Label(self,          textvariable=self.time,         font=font_time)
+        date_label =            tk.Label(self,          textvariable=self.date,         font=font_date, anchor='center', padx= 200, relief='solid', bd=2)
+        time_label =            tk.Label(self,          textvariable=self.time,         font=font_time, anchor='center', relief='solid', bd=2)
 
-        date_label.             grid(row=0, column=0)
-        time_label.             grid(row=1, column=0)
+        date_label.             grid(row=0)
+        time_label.             grid(row=1)
         self.config(relief='solid', bd=10)
         
     async def update(self):
