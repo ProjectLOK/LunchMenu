@@ -7,7 +7,7 @@ time.sleep(5)  #give some time for initialize
 category = ['temp', 'humi', 'pm10', 'pm2.5', 'co2', 'form']
 
 def getData():
-    dataset = [''] * 6
+    dataset = [None] * 6
     ardu.write(str.encode('update'))
     if serial.inWaiting:
         for i in range(6):
@@ -16,3 +16,8 @@ def getData():
         sensor = dict(zip(category, dataset))
         return sensor
 
+def sleep():
+    ardu.write(str.encode('sleep'))
+
+def wake():
+    #대충 gpio핀 제어 코드

@@ -6,6 +6,7 @@ import schedule as sch
 import asyncio
 import scripts.lunch_api as lunch_api
 import time
+#import scripts.Sensor.get_sensor
 
 placeholder = None
 
@@ -14,6 +15,10 @@ with open('config.json', 'r') as data:
     data.close()
     config = json.loads(config)
     fonts = config['fonts']
+
+with open('presets/main.json', 'r') as data:
+    preset_main = json.loads(data.read())["composition"]
+    data.close()
 
 def class_name(self):
     return re.sub(r'[.!]+', '', str(self))
@@ -40,6 +45,8 @@ lunch_data = LunchData()
 class TodayLunch(tk.Frame):
     def __init__(self, parent, *args, **kwargs):
         super(TodayLunch, self).__init__(parent, *args, **kwargs)
+        self.grid_propagate(0)
+        self.pack_propagate(0)
         self.dish =             tk.StringVar()
         self.cal =              tk.StringVar()
         update_loop =           asyncio.create_task(self.update())
@@ -48,13 +55,14 @@ class TodayLunch(tk.Frame):
         font_dish =             pack_font(fonts[class_name(self)]['dish'])
         font_cal =              pack_font(fonts[class_name(self)]['cal'])
 
-        title =                 tk.Label(self,          text='오늘 급식',               font=font_title, anchor='center',relief='solid', bd=2)
-        dish_label =            tk.Label(self,          textvariable=self.dish,         font=font_dish, anchor='center', relief='solid', bd=2)
-        cal_label =             tk.Label(self,          textvariable=self.cal,          font=font_cal, anchor='center',relief='solid', bd=2)
+        title =                 tk.Label(self,          text='오늘 급식',               font=font_title,                        relief='solid',     bd=0)
+        dish_label =            tk.Label(self,          textvariable=self.dish,         font=font_dish,    anchor='center',     relief='solid',     bd=0)
+        cal_label =             tk.Label(self,          textvariable=self.cal,          font=font_cal,     anchor='center',     relief='solid',     bd=0)
 
-        title.                  grid(row=0, column=0)
+        title.                  grid(row=0, column=0, ipadx=298)
         dish_label.             grid(row=1, column=0)
         cal_label.              grid(row=2, column=0)
+        title.grid_propagate(0)
         self.                   config(relief='solid', bd=10)
 
     async def update(self):
@@ -94,7 +102,6 @@ class Sensor(tk.Frame):
         self.fine =             tk.StringVar()
         self.ultrafine =        tk.StringVar()
         self.co2 =              tk.StringVar()
-        update_loop =           asyncio.create_task(self.update())
 
         category_font =         pack_font(fonts[class_name(self)]["category"])
         unit_font =             pack_font(fonts[class_name(self)]["unit"])
@@ -116,15 +123,15 @@ class Sensor(tk.Frame):
         data_humidity.          grid(row=1, column=3)
         not_unit_percent.       grid(row=1, column=4)
 
-        category_fine =         tk.Label(self,          text="미세먼지",                font=category_font,     justify=tk.LEFT, anchor='w')
+        category_fine =         tk.Label(self,          text="PM 10",                font=category_font,     justify=tk.LEFT, anchor='w')
         unit_fine =             tk.Label(self,          text="μg/m³",                   font=unit_font,         justify=tk.RIGHT)
         data_fine =             tk.Label(self,          textvariable=self.fine,         font=data_font,         justify=tk.LEFT)
         lamp_fine =             placeholder
-        category_ultrafine =    tk.Label(self,          text="초미세먼지",              font=category_font,     justify=tk.LEFT)
+        category_ultrafine =    tk.Label(self,          text="PM 2.5",              font=category_font,     justify=tk.LEFT)
         unit_ultrafine =        tk.Label(self,          text="μg/m³",                   font=unit_font,         justify=tk.RIGHT)
         data_ultrafine =        tk.Label(self,          textvariable=self.ultrafine,    font=data_font,         justify=tk.LEFT)
         lamp_ultrafine =        placeholder
-        category_co2 =          tk.Label(self,          text="이산화탄소",              font=category_font,     justify=tk.LEFT)
+        category_co2 =          tk.Label(self,          text="CO₂",              font=category_font,     justify=tk.LEFT)
         unit_co2 =              tk.Label(self,          text="ppm",                     font=unit_font,         justify=tk.RIGHT)
         data_co2 =              tk.Label(self,          textvariable=self.co2,          font=data_font,         justify=tk.LEFT)
         lamp_co2 =              placeholder
@@ -143,16 +150,25 @@ class Sensor(tk.Frame):
         data_co2.               grid(row=6, column=0)
         unit_co2.               grid(row=6, column=1)
         lamp_co2
+        
+        self.update()
+        sch.every(1).minute.do(self.update)
 
-    async def update(self):
-        while True:
-            self.temperature.set("27")
-            self.humidity.set("63")
-            self.fine.set("10")
-            self.ultrafine.set("100")
-            self.co2.set("20")
-            await asyncio.sleep(0.01)
-
+    def update(self):
+        '''
+        data = scripts.Sensor.get_sensor.getData()
+        self.temperature.set(data['temp'])
+        self.humidity.set(data['humi'])
+        self.fine.set(data['pm10'])
+        self.ultrafine.set(data['pm2.5'])
+        self.co2.set(data['co2'])
+        '''
+        self.temperature.set('0')
+        self.humidity.set('0')
+        self.fine.set('0')
+        self.ultrafine.set('0')
+        self.co2.set('0')
+    
 class Clock(tk.Frame):
     def __init__(self, parent, *args, **kwargs):
         super(Clock, self).__init__(parent, *args, **kwargs)
@@ -163,8 +179,8 @@ class Clock(tk.Frame):
         font_date = pack_font(fonts[class_name(self)]['date'])
         font_time = pack_font(fonts[class_name(self)]['time'])
 
-        date_label =            tk.Label(self,          textvariable=self.date,         font=font_date, anchor='center', padx= 200, relief='solid', bd=2)
-        time_label =            tk.Label(self,          textvariable=self.time,         font=font_time, anchor='center', relief='solid', bd=2)
+        date_label =            tk.Label(self,          textvariable=self.date,         font=font_date, anchor='center', padx= 186, relief='solid', bd=0)
+        time_label =            tk.Label(self,          textvariable=self.time,         font=font_time, anchor='center', relief='solid', bd=0)
 
         date_label.             grid(row=0)
         time_label.             grid(row=1)
