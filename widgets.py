@@ -6,6 +6,10 @@ import schedule as sch
 import asyncio
 import scripts.lunch_api as lunch_api
 import time
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
 
 placeholder = None
 
@@ -88,7 +92,10 @@ class Sensor(tk.Frame):
         self.fine =             tk.StringVar()
         self.ultrafine =        tk.StringVar()
         self.co2 =              tk.StringVar()
+<<<<<<< Updated upstream
         update_loop =           asyncio.create_task(self.update())
+=======
+>>>>>>> Stashed changes
 
         category_font =         pack_font(fonts[class_name(self)]["category"])
         unit_font =             pack_font(fonts[class_name(self)]["unit"])
@@ -136,6 +143,7 @@ class Sensor(tk.Frame):
         unit_co2.               grid(row=6, column=0)
         data_co2.               grid(row=6, column=1)
         lamp_co2
+<<<<<<< Updated upstream
 
     async def update(self):
         while True:
@@ -146,6 +154,20 @@ class Sensor(tk.Frame):
             self.co2.set("20")
             await asyncio.sleep(0.01)
 
+=======
+        
+        self.update()
+
+    def update(self):
+        print('sensor updated!')
+        self.temperature.set('10')
+        self.humidity.set('10')
+        self.fine.set('10')
+        self.ultrafine.set('10')
+        self.co2.set('10')
+
+
+>>>>>>> Stashed changes
 class Clock(tk.Frame):
     def __init__(self, parent, *args, **kwargs):
         super(Clock, self).__init__(parent, *args, **kwargs)
