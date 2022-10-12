@@ -12,14 +12,16 @@ def getData():
     ardu.write(str.encode('update'))
     # time.sleep(0.1)
     for i in range(6):
-        print(i)
+        #print(i)
         data = ardu.readline()  # read until ('\n')
         dataset[i] = data.decode('utf-8').rstrip()
     sensor = dict(zip(category, dataset))
-    print(sensor)
-    print(dataset)
+    #print(sensor)
+    #print(dataset)
+    return sensor
 
-
+'''
 getData()
 time.sleep(1)
 getData()
+'''

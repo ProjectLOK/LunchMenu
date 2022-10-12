@@ -6,7 +6,7 @@ import schedule as sch
 import asyncio
 import scripts.lunch_api as lunch_api
 import time
-#import scripts.Sensor.get_sensor as ardu_sensor
+import scripts.Sensor.get_sensor_for_debug as ardu_sensor
 
 placeholder = None
 
@@ -102,6 +102,7 @@ class Sensor(tk.Frame):
         self.fine =             tk.StringVar()
         self.ultrafine =        tk.StringVar()
         self.co2 =              tk.StringVar()
+        update_loop =           asyncio.create_task(self.sche())
 
         category_font =         pack_font(fonts[class_name(self)]["category"])
         unit_font =             pack_font(fonts[class_name(self)]["unit"])
@@ -167,13 +168,21 @@ class Sensor(tk.Frame):
 
 
     def update(self):
-        data = arudsensor.getData()
+        data = ardu_sensor.getData()
+        print(data)
+        print('sensor updated!')
         self.temperature.set(data['temp'])
         self.humidity.set(data['humi'])
         self.fine.set(data['pm10'])
         self.ultrafine.set(data['pm2.5'])
         self.co2.set(data['co2'])
 
+    async def sche(self):
+	    while True:
+	    	sch.run_pending()
+	    	await asyncio.sleep(10)
+	    
+    
     def sleep(self):
         ardu_sensor.sleep()
 
