@@ -6,7 +6,7 @@ import schedule as sch
 import asyncio
 import scripts.lunch_api as lunch_api
 import time
-#import scripts.Sensor.get_sensor
+#import scripts.Sensor.get_sensor as ardu_sensor
 
 placeholder = None
 
@@ -153,21 +153,32 @@ class Sensor(tk.Frame):
         
         self.update()
         sch.every(1).minute.do(self.update)
+        sch.every().monday.at("08:40").do(self.wakeUp)
+        sch.every().monday.at("22:00").do(self.sleep)
+        sch.every().tuesday.at("08:40").do(self.wakeUp)
+        sch.every().tuesday.at("22:00").do(self.sleep)
+        sch.every().wednesday.at("08:40").do(self.wakeUp)
+        sch.every().wednesday.at("22:00").do(self.sleep)
+        sch.every().thursday.at("08:40").do(self.wakeUp)
+        sch.every().thursday.at("22:00").do(self.sleep)
+        sch.every().friday.at("08:40").do(self.wakeUp)
+        sch.every().friday.at("22:00").do(self.sleep)
+
+
 
     def update(self):
-        '''
-        data = scripts.Sensor.get_sensor.getData()
+        data = arudsensor.getData()
         self.temperature.set(data['temp'])
         self.humidity.set(data['humi'])
         self.fine.set(data['pm10'])
         self.ultrafine.set(data['pm2.5'])
         self.co2.set(data['co2'])
-        '''
-        self.temperature.set('0')
-        self.humidity.set('0')
-        self.fine.set('0')
-        self.ultrafine.set('0')
-        self.co2.set('0')
+
+    def sleep(self):
+        ardu_sensor.sleep()
+
+    def wakeUp(self):
+        ardu_sensor.wake()
     
 class Clock(tk.Frame):
     def __init__(self, parent, *args, **kwargs):
