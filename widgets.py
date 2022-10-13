@@ -55,15 +55,15 @@ class TodayLunch(tk.Frame):
         font_dish =             pack_font(fonts[class_name(self)]['dish'])
         font_cal =              pack_font(fonts[class_name(self)]['cal'])
 
-        title =                 tk.Label(self,          text='오늘 급식',               font=font_title,                        relief='solid',     bd=0)
-        dish_label =            tk.Label(self,          textvariable=self.dish,         font=font_dish,    anchor='center',     relief='solid',     bd=0)
-        cal_label =             tk.Label(self,          textvariable=self.cal,          font=font_cal,     anchor='center',     relief='solid',     bd=0)
+        title =                 tk.Label(self,          text='오늘 급식',               font=font_title,                        relief='solid',     bd=0, bg='white')
+        dish_label =            tk.Label(self,          textvariable=self.dish,         font=font_dish,    anchor='center',     relief='solid',     bd=0, bg='white')
+        cal_label =             tk.Label(self,          textvariable=self.cal,          font=font_cal,     anchor='center',     relief='solid',     bd=0, bg='white')
 
         title.                  grid(row=0, column=0, ipadx=298)
         dish_label.             grid(row=1, column=0)
         cal_label.              grid(row=2, column=0)
         title.grid_propagate(0)
-        self.                   config(relief='solid', bd=10)
+        self.                   config(relief='solid', bd=10, bg='white')
 
     async def update(self):
         while True:
@@ -81,12 +81,12 @@ class NextdayLunch(tk.Frame):
         dish_font =             pack_font(fonts[class_name(self)]['dish'])
         cal_font =              pack_font(fonts[class_name(self)]['cal'])
 
-        dish_label =            tk.Label(self,          textvariable=self.dish,         font=dish_font, anchor='center')
-        cal_label =             tk.Label(self,          textvariable=self.cal,          font=cal_font, anchor='center')
+        dish_label =            tk.Label(self,          textvariable=self.dish,         font=dish_font, anchor='center', bg='white')
+        cal_label =             tk.Label(self,          textvariable=self.cal,          font=cal_font, anchor='center', bg='white')
 
         dish_label.             grid(row=0, column=0)
         cal_label.              grid(row=1, column=0)
-        self.config(relief='solid', bd=10)
+        self.config(relief='solid', bd=10, bg='white')
 
     async def update(self):
         while True:
@@ -110,12 +110,12 @@ class Sensor(tk.Frame):
 
         frame_air =             tk.Frame(self)
 
-        category_air =          tk.Label(frame_air,     text="AIR",                  font=category_font,     justify=tk.LEFT, anchor='w')
-        data_temperature =      tk.Label(frame_air,     textvariable=self.temperature,  font=data_font)
-        unit_celcius =          tk.Label(frame_air,     text="°C",                      font=unit_font)
-        split_bar =             tk.Label(frame_air,     text="|",                       font=category_font)
-        data_humidity =         tk.Label(frame_air,     textvariable=self.humidity,     font=data_font)
-        not_unit_percent =      tk.Label(frame_air,     text="%",                       font=unit_font)
+        category_air =          tk.Label(frame_air,     text="AIR",                  font=category_font,     justify=tk.LEFT, anchor='w', bg='white')
+        data_temperature =      tk.Label(frame_air,     textvariable=self.temperature,  font=data_font, bg='white')
+        unit_celcius =          tk.Label(frame_air,     text="°C",                      font=unit_font, bg='white')
+        split_bar =             tk.Label(frame_air,     text="|",                       font=category_font, bg='white')
+        data_humidity =         tk.Label(frame_air,     textvariable=self.humidity,     font=data_font, bg='white')
+        not_unit_percent =      tk.Label(frame_air,     text="%",                       font=unit_font, bg='white')
 
         category_air.           grid(row=0, column=0, columnspan=5)
         data_temperature.       grid(row=1, column=0)
@@ -124,17 +124,17 @@ class Sensor(tk.Frame):
         data_humidity.          grid(row=1, column=3)
         not_unit_percent.       grid(row=1, column=4)
 
-        category_fine =         tk.Label(self,          text="PM 10",                font=category_font,     justify=tk.LEFT, anchor='w')
-        unit_fine =             tk.Label(self,          text="μg/m³",                   font=unit_font,         justify=tk.RIGHT)
-        data_fine =             tk.Label(self,          textvariable=self.fine,         font=data_font,         justify=tk.LEFT)
+        category_fine =         tk.Label(self,          text="PM 10",                font=category_font,     justify=tk.LEFT, anchor='w', bg='white')
+        unit_fine =             tk.Label(self,          text="μg/m³",                   font=unit_font,         justify=tk.RIGHT, bg='white')
+        data_fine =             tk.Label(self,          textvariable=self.fine,         font=data_font,         justify=tk.LEFT, bg='white')
         lamp_fine =             placeholder
-        category_ultrafine =    tk.Label(self,          text="PM 2.5",              font=category_font,     justify=tk.LEFT)
-        unit_ultrafine =        tk.Label(self,          text="μg/m³",                   font=unit_font,         justify=tk.RIGHT)
-        data_ultrafine =        tk.Label(self,          textvariable=self.ultrafine,    font=data_font,         justify=tk.LEFT)
+        category_ultrafine =    tk.Label(self,          text="PM 2.5",              font=category_font,     justify=tk.LEFT, bg='white')
+        unit_ultrafine =        tk.Label(self,          text="μg/m³",                   font=unit_font,         justify=tk.RIGHT, bg='white')
+        data_ultrafine =        tk.Label(self,          textvariable=self.ultrafine,    font=data_font,         justify=tk.LEFT, bg='white')
         lamp_ultrafine =        placeholder
-        category_co2 =          tk.Label(self,          text="CO₂",              font=category_font,     justify=tk.LEFT)
-        unit_co2 =              tk.Label(self,          text="ppm",                     font=unit_font,         justify=tk.RIGHT)
-        data_co2 =              tk.Label(self,          textvariable=self.co2,          font=data_font,         justify=tk.LEFT)
+        category_co2 =          tk.Label(self,          text="CO₂",              font=category_font,     justify=tk.LEFT, bg='white')
+        unit_co2 =              tk.Label(self,          text="ppm",                     font=unit_font,         justify=tk.RIGHT, bg='white')
+        data_co2 =              tk.Label(self,          textvariable=self.co2,          font=data_font,         justify=tk.LEFT, bg='white')
         lamp_co2 =              placeholder
 
         frame_air.              grid(row=0, column=0, columnspan=3)
@@ -164,6 +164,7 @@ class Sensor(tk.Frame):
         sch.every().thursday.at("22:00").do(self.sleep)
         sch.every().friday.at("08:40").do(self.wakeUp)
         sch.every().friday.at("22:00").do(self.sleep)
+        self.config(bg='white')
 
 
 
@@ -199,12 +200,12 @@ class Clock(tk.Frame):
         font_date = pack_font(fonts[class_name(self)]['date'])
         font_time = pack_font(fonts[class_name(self)]['time'])
 
-        date_label =            tk.Label(self,          textvariable=self.date,         font=font_date, anchor='center', padx= 186, relief='solid', bd=0)
-        time_label =            tk.Label(self,          textvariable=self.time,         font=font_time, anchor='center', relief='solid', bd=0)
+        date_label =            tk.Label(self,          textvariable=self.date,         font=font_date, anchor='center', padx= 186, relief='solid', bd=0, bg='white')
+        time_label =            tk.Label(self,          textvariable=self.time,         font=font_time, anchor='center', relief='solid', bd=0, bg='white')
 
         date_label.             grid(row=0)
         time_label.             grid(row=1)
-        self.config(relief='solid', bd=10)
+        self.config(relief='solid', bd=10, bg='white')
         
     async def update(self):
         while True:
