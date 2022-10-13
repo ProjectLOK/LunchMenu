@@ -1,8 +1,16 @@
 import serial
 import time
+import json
 
-ardu = serial.Serial("/dev/ttyUSB0", 115200)
-time.sleep(5)
+with open('config.json', 'r') as data:
+    config = data.read()
+    data.close()
+    config = json.loads(config)
+    rtSensor = config['sensor']
+
+if rtSensor:
+    ardu = serial.Serial("/dev/ttyUSB0", 115200)
+    time.sleep(5)
 
 category = ['temp', 'humi', 'pm10', 'pm2.5', 'co2', 'form']
 

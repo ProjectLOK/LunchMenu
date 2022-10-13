@@ -6,7 +6,7 @@ import schedule as sch
 import asyncio
 import scripts.lunch_api as lunch_api
 import time
-
+import scripts.Sensor.get_sensor_for_debug as ardu_sensor
 
 placeholder = None
 
@@ -17,8 +17,7 @@ with open('config.json', 'r') as data:
     fonts = config['fonts']
     rtSensor = config['sensor']
 
-if rtSensor:
-    import scripts.Sensor.get_sensor_for_debug as ardu_sensor
+
 
 with open('presets/main.json', 'r') as data:
     preset_main = json.loads(data.read())["composition"]
@@ -114,12 +113,13 @@ class Sensor(tk.Frame):
         frame_air =             tk.Frame(self)
         frame_air.config(bg='white')
 
-        category_air =          tk.Label(frame_air,     text="AIR",                  font=category_font,     justify=tk.LEFT, anchor='w', bg='white',     relief='solid',     bd=5)
-        data_temperature =      tk.Label(frame_air,     textvariable=self.temperature,  font=data_font, bg='white',     relief='solid',     bd=5)
-        unit_celcius =          tk.Label(frame_air,     text="°C",                      font=unit_font, bg='white',     relief='solid',     bd=5)
-        split_bar =             tk.Label(frame_air,     text="|",                       font=category_font, bg='white',     relief='solid',     bd=5)
-        data_humidity =         tk.Label(frame_air,     textvariable=self.humidity,     font=data_font, bg='white',     relief='solid',     bd=5)
-        not_unit_percent =      tk.Label(frame_air,     text="%",                       font=unit_font, bg='white',     relief='solid',     bd=5)
+        category_air =          tk.Label(frame_air,     text="AIR",                  font=category_font,     justify=tk.LEFT, anchor='w', bg='white',     relief='solid',     bd=0)
+        data_temperature =      tk.Label(frame_air,     textvariable=self.temperature,  font=data_font, bg='white',     relief='solid',     bd=0)
+        unit_celcius =          tk.Label(frame_air,     text="°C",                      font=unit_font, bg='white',     relief='solid',     bd=0)
+        split_bar =             tk.Label(frame_air,     text="|",                       font=category_font, bg='white',     relief='solid',     bd=0)
+        data_humidity =         tk.Label(frame_air,     textvariable=self.humidity,     font=data_font, bg='white',     relief='solid',     bd=0)
+        not_unit_percent =      tk.Label(frame_air,     text="%",                       font=unit_font, bg='white',     relief='solid',     bd=0)
+        line = tk.Label(self, bg='black', height='1')
 
         category_air.           grid(row=0, column=0, columnspan=5, sticky='w')
         data_temperature.       grid(row=1, column=0)
@@ -142,18 +142,19 @@ class Sensor(tk.Frame):
         lamp_co2 =              placeholder
 
         frame_air.              grid(row=0, column=0, columnspan=3)
-        category_fine.          grid(row=1, column=0, columnspan=2, sticky='w')
-        data_fine.              grid(row=2, column=0, sticky='w')
-        unit_fine.              grid(row=2, column=1, sticky='w')
+        #line.grid(row=1, column=0, columnspan=3, sticky='nsew')
+        category_fine.          grid(row=2, column=0, columnspan=2, sticky='w')
+        data_fine.              grid(row=3, column=0, sticky='w')
+        unit_fine.              grid(row=3, column=1, sticky='w')
         lamp_fine
-        category_ultrafine.     grid(row=3, column=0, columnspan=2, sticky='w')
-        data_ultrafine.         grid(row=4, column=0, sticky='w')
-        unit_ultrafine.         grid(row=4, column=1, sticky='w')
+        category_ultrafine.     grid(row=4, column=0, columnspan=2, sticky='w')
+        data_ultrafine.         grid(row=5, column=0, sticky='w')
+        unit_ultrafine.         grid(row=5, column=1, sticky='w')
 
         lamp_ultrafine
-        category_co2.           grid(row=5, column=0, columnspan=2, sticky='w')
-        data_co2.               grid(row=6, column=0, sticky='w')
-        unit_co2.               grid(row=6, column=1, sticky='w')
+        category_co2.           grid(row=6, column=0, columnspan=2, sticky='w')
+        data_co2.               grid(row=7, column=0, sticky='w')
+        unit_co2.               grid(row=7, column=1, sticky='w')
         lamp_co2
         
         self.update()
