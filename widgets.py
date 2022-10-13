@@ -6,7 +6,7 @@ import schedule as sch
 import asyncio
 import scripts.lunch_api as lunch_api
 import time
-import scripts.Sensor.get_sensor_for_debug as ardu_sensor
+
 
 placeholder = None
 
@@ -15,6 +15,10 @@ with open('config.json', 'r') as data:
     data.close()
     config = json.loads(config)
     fonts = config['fonts']
+    rtSensor = config['sensor']
+
+if rtSensor:
+    import scripts.Sensor.get_sensor_for_debug as ardu_sensor
 
 with open('presets/main.json', 'r') as data:
     preset_main = json.loads(data.read())["composition"]
@@ -102,22 +106,22 @@ class Sensor(tk.Frame):
         self.fine =             tk.StringVar()
         self.ultrafine =        tk.StringVar()
         self.co2 =              tk.StringVar()
-        update_loop =           asyncio.create_task(self.sche())
 
         category_font =         pack_font(fonts[class_name(self)]["category"])
         unit_font =             pack_font(fonts[class_name(self)]["unit"])
         data_font =             pack_font(fonts[class_name(self)]["data"])
 
         frame_air =             tk.Frame(self)
+        frame_air.config(bg='white')
 
-        category_air =          tk.Label(frame_air,     text="AIR",                  font=category_font,     justify=tk.LEFT, anchor='w', bg='white')
-        data_temperature =      tk.Label(frame_air,     textvariable=self.temperature,  font=data_font, bg='white')
-        unit_celcius =          tk.Label(frame_air,     text="°C",                      font=unit_font, bg='white')
-        split_bar =             tk.Label(frame_air,     text="|",                       font=category_font, bg='white')
-        data_humidity =         tk.Label(frame_air,     textvariable=self.humidity,     font=data_font, bg='white')
-        not_unit_percent =      tk.Label(frame_air,     text="%",                       font=unit_font, bg='white')
+        category_air =          tk.Label(frame_air,     text="AIR",                  font=category_font,     justify=tk.LEFT, anchor='w', bg='white',     relief='solid',     bd=5)
+        data_temperature =      tk.Label(frame_air,     textvariable=self.temperature,  font=data_font, bg='white',     relief='solid',     bd=5)
+        unit_celcius =          tk.Label(frame_air,     text="°C",                      font=unit_font, bg='white',     relief='solid',     bd=5)
+        split_bar =             tk.Label(frame_air,     text="|",                       font=category_font, bg='white',     relief='solid',     bd=5)
+        data_humidity =         tk.Label(frame_air,     textvariable=self.humidity,     font=data_font, bg='white',     relief='solid',     bd=5)
+        not_unit_percent =      tk.Label(frame_air,     text="%",                       font=unit_font, bg='white',     relief='solid',     bd=5)
 
-        category_air.           grid(row=0, column=0, columnspan=5)
+        category_air.           grid(row=0, column=0, columnspan=5, sticky='w')
         data_temperature.       grid(row=1, column=0)
         unit_celcius.           grid(row=1, column=1)
         split_bar.              grid(row=1, column=2)
@@ -138,57 +142,66 @@ class Sensor(tk.Frame):
         lamp_co2 =              placeholder
 
         frame_air.              grid(row=0, column=0, columnspan=3)
-        category_fine.          grid(row=1, column=0, columnspan=2)
-        data_fine.              grid(row=2, column=0)
-        unit_fine.              grid(row=2, column=1)
+        category_fine.          grid(row=1, column=0, columnspan=2, sticky='w')
+        data_fine.              grid(row=2, column=0, sticky='w')
+        unit_fine.              grid(row=2, column=1, sticky='w')
         lamp_fine
-        category_ultrafine.     grid(row=3, column=0, columnspan=2)
-        data_ultrafine.         grid(row=4, column=0)
-        unit_ultrafine.         grid(row=4, column=1)
+        category_ultrafine.     grid(row=3, column=0, columnspan=2, sticky='w')
+        data_ultrafine.         grid(row=4, column=0, sticky='w')
+        unit_ultrafine.         grid(row=4, column=1, sticky='w')
 
         lamp_ultrafine
-        category_co2.           grid(row=5, column=0, columnspan=2)
-        data_co2.               grid(row=6, column=0)
-        unit_co2.               grid(row=6, column=1)
+        category_co2.           grid(row=5, column=0, columnspan=2, sticky='w')
+        data_co2.               grid(row=6, column=0, sticky='w')
+        unit_co2.               grid(row=6, column=1, sticky='w')
         lamp_co2
         
         self.update()
-        sch.every(1).minute.do(self.update)
-        sch.every().monday.at("08:40").do(self.wakeUp)
-        sch.every().monday.at("22:00").do(self.sleep)
-        sch.every().tuesday.at("08:40").do(self.wakeUp)
-        sch.every().tuesday.at("22:00").do(self.sleep)
-        sch.every().wednesday.at("08:40").do(self.wakeUp)
-        sch.every().wednesday.at("22:00").do(self.sleep)
-        sch.every().thursday.at("08:40").do(self.wakeUp)
-        sch.every().thursday.at("22:00").do(self.sleep)
-        sch.every().friday.at("08:40").do(self.wakeUp)
-        sch.every().friday.at("22:00").do(self.sleep)
         self.config(bg='white')
-
+        if rtSensor:
+            update_loop = asyncio.create_task(self.sche())
+            sch.every(1).minute.do(self.update)
+            sch.every().monday.at("08:40").do(self.wakeUp)
+            sch.every().monday.at("22:00").do(self.sleep)
+            sch.every().tuesday.at("08:40").do(self.wakeUp)
+            sch.every().tuesday.at("22:00").do(self.sleep)
+            sch.every().wednesday.at("08:40").do(self.wakeUp)
+            sch.every().wednesday.at("22:00").do(self.sleep)
+            sch.every().thursday.at("08:40").do(self.wakeUp)
+            sch.every().thursday.at("22:00").do(self.sleep)
+            sch.every().friday.at("08:40").do(self.wakeUp)
+            sch.every().friday.at("22:00").do(self.sleep)
 
 
     def update(self):
-        data = ardu_sensor.getData()
-        print(data)
-        print('sensor updated!')
-        self.temperature.set(data['temp'])
-        self.humidity.set(data['humi'])
-        self.fine.set(data['pm10'])
-        self.ultrafine.set(data['pm2.5'])
-        self.co2.set(data['co2'])
+        if rtSensor:
+            data = ardu_sensor.getData()
+            print(data)
+            print('sensor updated!')
+            self.temperature.set(data['temp'])
+            self.humidity.set(data['humi'])
+            self.fine.set(data['pm10'])
+            self.ultrafine.set(data['pm2.5'])
+            self.co2.set(data['co2'])
+        else:
+            self.temperature.set('21')
+            self.humidity.set('53')
+            self.fine.set('15')
+            self.ultrafine.set('20')
+            self.co2.set('421')
 
-    async def sche(self):
-	    while True:
-	    	sch.run_pending()
-	    	await asyncio.sleep(10)
-	    
-    
-    def sleep(self):
-        ardu_sensor.sleep()
+    if rtSensor:
+        async def sche(self):
+            while True:
+                sch.run_pending()
+                await asyncio.sleep(10)
 
-    def wakeUp(self):
-        ardu_sensor.wake()
+
+        def sleep(self):
+            ardu_sensor.sleep()
+
+        def wakeUp(self):
+            ardu_sensor.wake()
     
 class Clock(tk.Frame):
     def __init__(self, parent, *args, **kwargs):

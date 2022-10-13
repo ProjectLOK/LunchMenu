@@ -3,14 +3,14 @@ import requests
 import re
 import json
 
-'''with open('config.json', 'r') as data:
+with open('config.json', 'r') as data:
     config = data.read()
     data.close()
     config = json.loads(config)
     debug = config['debug']
 __print = print
 print = lambda a: __print(a) if debug else 0
-'''
+
 URL = 'https://open.neis.go.kr/hub/mealServiceDietInfo'
 SERVICE_KEY = '128332e82a2f42bcbc58d826a24084ce'
 ATPT_OFCDC_SC_CODE = 'J10'
