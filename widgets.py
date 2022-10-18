@@ -87,7 +87,7 @@ class NextdayLunch(tk.Frame):
         dish_label =            tk.Label(self,          textvariable=self.dish,         font=dish_font, anchor='center', bg='white')
         cal_label =             tk.Label(self,          textvariable=self.cal,          font=cal_font, anchor='center', bg='white')
 
-        dish_label.             grid(row=0, column=0)
+        dish_label.             grid(row=0, column=0, sticky='nsew')
         cal_label.              grid(row=1, column=0)
         self.config(relief='solid', bd=10, bg='white')
 

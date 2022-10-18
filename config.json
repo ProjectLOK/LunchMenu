@@ -1,6 +1,6 @@
 {
     "debug": 0,
-    "sensor": 0,
+    "sensor": 1,
     "fonts": {
         "_comment": "https://docs.python.org/3/library/tkinter.font.html",
         "common": {
@@ -32,7 +32,7 @@
             },
             "dish": {
                 "family": "Noto Sans KR Custom TodayMenu",
-                "size": 75,
+                "size": 73,
                 "weight": "BOLD",
                 "slant": "ROMAN",
                 "underline": 0,
@@ -50,7 +50,7 @@
         "nextdaylunch": {
             "dish": {
                 "family": "Noto Sans KR",
-                "size": 55,
+                "size": 36,
                 "weight": "BOLD",
                 "slant": "ROMAN",
                 "underline": 0,
@@ -68,7 +68,7 @@
         "clock": {
             "date": {
                 "family": "Noto Sans KR Custom Date",
-                "size": 48,
+                "size": 47,
                 "weight": "BOLD",
                 "slant": "ROMAN",
                 "underline": 0,
@@ -76,7 +76,7 @@
             },
             "time": {
                 "family": "Noto Sans KR Custom Time",
-                "size": 110,
+                "size": 125,
                 "weight": "NORMAL",
                 "slant": "ROMAN",
                 "underline": 0,
@@ -94,7 +94,7 @@
             },
             "data": {
                 "family": "Gothic A1 Custom Sensor Data",
-                "size": 80,
+                "size": 65,
                 "weight": "NORMAL",
                 "slant": "ROMAN",
                 "underline": 0,
