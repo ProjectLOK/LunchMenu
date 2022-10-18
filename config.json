@@ -1,5 +1,5 @@
 {
-    "debug": 0,
+    "debug": 1,
     "sensor": 1,
     "fonts": {
         "_comment": "https://docs.python.org/3/library/tkinter.font.html",
@@ -50,7 +50,7 @@
         "nextdaylunch": {
             "dish": {
                 "family": "Noto Sans KR",
-                "size": 36,
+                "size": 34,
                 "weight": "BOLD",
                 "slant": "ROMAN",
                 "underline": 0,

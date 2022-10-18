@@ -39,7 +39,7 @@ class LunchData:
         self.data.api_call()
         self.dish = self.data.dish
         self.cal = self.data.cal
-        sch.every().day.at("03:00").do(self.update)
+        sch.every().day.at("00:00").do(self.update)
 
        
     def update(self):
@@ -56,19 +56,22 @@ class TodayLunch(tk.Frame):
         self.title.set('오늘 급식')
         self.dish =             tk.StringVar()
         self.cal =              tk.StringVar()
+        self.dish.set(lunch_data.dish[0])
+        self.cal.set(lunch_data.cal[0])
+        
+        sch.every().day.at("12:10").do(lambda: self.title.set('내일 급식'))
         sch.every().monday.at("12:10").do(lambda: self.dish.set(lunch_data.dish[1]))
         sch.every().tuesday.at("12:10").do(lambda: self.dish.set(lunch_data.dish[1]))
         sch.every().wednesday.at("12:10").do(lambda: self.dish.set(lunch_data.dish[1]))
         sch.every().thursday.at("12:10").do(lambda: self.dish.set(lunch_data.dish[1]))
         sch.every().friday.at("12:10").do(lambda: self.dish.set(lunch_data.dish[1]))
-        sch.every().day.at("12:10").do(lambda: self.title.set('내일 급식'))
-        sch.every().day.at("00:01").do(lambda: self.title.set('오늘 급식'))
-        sch.every().monday.at("03:01").do(lambda: self.dish.set(lunch_data.dish[0]))
-        sch.every().tuesday.at("03:01").do(lambda: self.dish.set(lunch_data.dish[0]))
-        sch.every().wednesday.at("03:01").do(lambda: self.dish.set(lunch_data.dish[0]))
-        sch.every().thursday.at("03:01").do(lambda: self.dish.set(lunch_data.dish[0]))
-        sch.every().friday.at("03:01").do(lambda: self.dish.set(lunch_data.dish[0]))
-        update_loop =           asyncio.create_task(self.update())
+
+        sch.every().day.at("00:00").do(lambda: self.title.set('오늘 급식'))
+        sch.every().monday.at("00:01").do(lambda: self.dish.set(lunch_data.dish[0]))
+        sch.every().tuesday.at("00:01").do(lambda: self.dish.set(lunch_data.dish[0]))
+        sch.every().wednesday.at("00:01").do(lambda: self.dish.set(lunch_data.dish[0]))
+        sch.every().thursday.at("00:01").do(lambda: self.dish.set(lunch_data.dish[0]))
+        sch.every().friday.at("00:01").do(lambda: self.dish.set(lunch_data.dish[0]))
 
         font_title =            pack_font(fonts[class_name(self)]['title'])
         font_dish =             pack_font(fonts[class_name(self)]['dish'])
@@ -83,18 +86,15 @@ class TodayLunch(tk.Frame):
         cal_label.              grid(row=2, column=0)
         self.                   config(relief='solid', bd=10, bg='white')
 
-    async def update(self):
-        while True:
-            self.dish.set(lunch_data.dish[0])
-            self.cal.set(lunch_data.cal[0])
-            await asyncio.sleep(0.01)
+
 
 class NextdayLunch(tk.Frame):
     def __init__(self, parent, *args, **kwargs):
         super(NextdayLunch, self).__init__(parent, *args, **kwargs)
         self.dish =             tk.StringVar()
         self.cal =              tk.StringVar()
-        update_loop =           asyncio.create_task(self.update())
+        self.dish.set(lunch_data.dish[1])
+        self.cal.set(lunch_data.cal[1])
 
         dish_font =             pack_font(fonts[class_name(self)]['dish'])
         cal_font =              pack_font(fonts[class_name(self)]['cal'])
@@ -106,11 +106,19 @@ class NextdayLunch(tk.Frame):
         cal_label.              grid(row=1, column=0)
         self.config(relief='solid', bd=10, bg='white')
 
-    async def update(self):
-        while True:
-            self.dish.set(lunch_data.dish[1])
-            self.cal.set(lunch_data.cal[1])
-            await asyncio.sleep(0.01)
+        sch.every().monday.at("12:10").do(lambda: self.dish.set(lunch_data.dish[2]))
+        sch.every().tuesday.at("12:10").do(lambda: self.dish.set(lunch_data.dish[2]))
+        sch.every().wednesday.at("12:10").do(lambda: self.dish.set(lunch_data.dish[2]))
+        sch.every().thursday.at("12:10").do(lambda: self.dish.set(lunch_data.dish[2]))
+        sch.every().friday.at("12:10").do(lambda: self.dish.set(lunch_data.dish[2]))
+
+        sch.every().monday.at("00:01").do(lambda: self.dish.set(lunch_data.dish[1]))
+        sch.every().tuesday.at("00:01").do(lambda: self.dish.set(lunch_data.dish[1]))
+        sch.every().wednesday.at("00:01").do(lambda: self.dish.set(lunch_data.dish[1]))
+        sch.every().thursday.at("00:01").do(lambda: self.dish.set(lunch_data.dish[1]))
+        sch.every().friday.at("00:01").do(lambda: self.dish.set(lunch_data.dish[1]))
+
+
 
 class Sensor(tk.Frame):
     def __init__(self, parent, *args, **kwargs):
@@ -177,6 +185,7 @@ class Sensor(tk.Frame):
         if rtSensor:
             update_loop = asyncio.create_task(self.sche())
             sch.every(1).minute.do(self.update)
+            '''
             sch.every().monday.at("08:40").do(self.wakeUp)
             sch.every().monday.at("22:00").do(self.sleep)
             sch.every().tuesday.at("08:40").do(self.wakeUp)
@@ -187,6 +196,7 @@ class Sensor(tk.Frame):
             sch.every().thursday.at("22:00").do(self.sleep)
             sch.every().friday.at("08:40").do(self.wakeUp)
             sch.every().friday.at("22:00").do(self.sleep)
+            '''
 
 
     def update(self):
@@ -212,7 +222,7 @@ class Sensor(tk.Frame):
         async def sche(self):
             while True:
                 sch.run_pending()
-                await asyncio.sleep(10)
+                await asyncio.sleep(0.01)
 
 
         def sleep(self):

@@ -20,7 +20,7 @@ QUERY_TEMPLATE = {
         'Key': SERVICE_KEY,
         'Type': 'json',
         'pIndex': 1,
-        'pSize': 2,
+        'pSize': 6,
         'ATPT_OFCDC_SC_CODE': ATPT_OFCDC_SC_CODE,
         'SD_SCHUL_CODE': SD_SCHUL_CODE,
         'MMEAL_SC_CODE': '',
@@ -34,7 +34,7 @@ class lunch_api():
         self.req_date = datetime.today()
         query = dict(QUERY_TEMPLATE)
         query['MLSV_FROM_YMD'] = self.req_date.strftime('%Y%m%d')
-        query['MLSV_TO_YMD'] = (self.req_date + timedelta(days=3)).strftime('%Y%m%d')
+        query['MLSV_TO_YMD'] = (self.req_date + timedelta(days=7)).strftime('%Y%m%d')
         res = requests.get(URL, params=query).json()
         print(res)
 
