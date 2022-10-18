@@ -7,7 +7,6 @@ with open('config.json', 'r') as data:
     data.close()
     config = json.loads(config)
     rtSensor = config['sensor']
-
 if rtSensor:
     ardu = serial.Serial("/dev/ttyUSB0", 115200)
     time.sleep(5)
@@ -28,8 +27,7 @@ def getData():
     #print(dataset)
     return sensor
 
-'''
+
 getData()
-time.sleep(1)
+time.sleep(0.5)
 getData()
-'''

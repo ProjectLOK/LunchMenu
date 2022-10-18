@@ -41,8 +41,10 @@ class LunchData:
         self.cal = self.data.cal
         sch.every().day.at("03:00").do(self.update)
 
+       
     def update(self):
         self.data.api_call()
+
 lunch_data = LunchData()
 
 class TodayLunch(tk.Frame):
@@ -50,22 +52,35 @@ class TodayLunch(tk.Frame):
         super(TodayLunch, self).__init__(parent, *args, **kwargs)
         self.grid_propagate(0)
         self.pack_propagate(0)
+        self.title = tk.StringVar()
+        self.title.set('오늘 급식')
         self.dish =             tk.StringVar()
         self.cal =              tk.StringVar()
+        sch.every().monday.at("12:10").do(lambda: self.dish.set(lunch_data.dish[1]))
+        sch.every().tuesday.at("12:10").do(lambda: self.dish.set(lunch_data.dish[1]))
+        sch.every().wednesday.at("12:10").do(lambda: self.dish.set(lunch_data.dish[1]))
+        sch.every().thursday.at("12:10").do(lambda: self.dish.set(lunch_data.dish[1]))
+        sch.every().friday.at("12:10").do(lambda: self.dish.set(lunch_data.dish[1]))
+        sch.every().day.at("12:10").do(lambda: self.title.set('내일 급식'))
+        sch.every().day.at("00:01").do(lambda: self.title.set('오늘 급식'))
+        sch.every().monday.at("03:01").do(lambda: self.dish.set(lunch_data.dish[0]))
+        sch.every().tuesday.at("03:01").do(lambda: self.dish.set(lunch_data.dish[0]))
+        sch.every().wednesday.at("03:01").do(lambda: self.dish.set(lunch_data.dish[0]))
+        sch.every().thursday.at("03:01").do(lambda: self.dish.set(lunch_data.dish[0]))
+        sch.every().friday.at("03:01").do(lambda: self.dish.set(lunch_data.dish[0]))
         update_loop =           asyncio.create_task(self.update())
 
         font_title =            pack_font(fonts[class_name(self)]['title'])
         font_dish =             pack_font(fonts[class_name(self)]['dish'])
         font_cal =              pack_font(fonts[class_name(self)]['cal'])
 
-        title =                 tk.Label(self,          text='오늘 급식',               font=font_title,                        relief='solid',     bd=0, bg='white')
+        title_label =                 tk.Label(self,          textvariable=self.title,               font=font_title,                        relief='solid',     bd=0, bg='white')
         dish_label =            tk.Label(self,          textvariable=self.dish,         font=font_dish,    anchor='center',     relief='solid',     bd=0, bg='white')
         cal_label =             tk.Label(self,          textvariable=self.cal,          font=font_cal,     anchor='center',     relief='solid',     bd=0, bg='white')
 
-        title.                  grid(row=0, column=0, ipadx=298)
+        title_label.                  grid(row=0, column=0, ipadx=298)
         dish_label.             grid(row=1, column=0)
         cal_label.              grid(row=2, column=0)
-        title.grid_propagate(0)
         self.                   config(relief='solid', bd=10, bg='white')
 
     async def update(self):
@@ -87,7 +102,7 @@ class NextdayLunch(tk.Frame):
         dish_label =            tk.Label(self,          textvariable=self.dish,         font=dish_font, anchor='center', bg='white')
         cal_label =             tk.Label(self,          textvariable=self.cal,          font=cal_font, anchor='center', bg='white')
 
-        dish_label.             grid(row=0, column=0, sticky='nsew')
+        dish_label.             grid(row=0, column=0, sticky='nsew', ipadx='40')
         cal_label.              grid(row=1, column=0)
         self.config(relief='solid', bd=10, bg='white')
 
@@ -179,6 +194,8 @@ class Sensor(tk.Frame):
             data = ardu_sensor.getData()
             print(data)
             print('sensor updated!')
+            data['temp'] = round(float(data['temp']), 1)
+            data['humi'] = round(float(data['humi']), 1)
             self.temperature.set(data['temp'])
             self.humidity.set(data['humi'])
             self.fine.set(data['pm10'])
