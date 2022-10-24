@@ -41,25 +41,26 @@ class LunchData:
         self.cal = self.data.cal
         sch.every().day.at("00:00").do(self.update)
 
-       
     def update(self):
         self.data.api_call()
+        self.dish = self.data.dish
+        self.cal = self.data.cal
 
 lunch_data = LunchData()
+
 
 class TodayLunch(tk.Frame):
     def __init__(self, parent, *args, **kwargs):
         super(TodayLunch, self).__init__(parent, *args, **kwargs)
-        self.grid_propagate(0)
-        self.pack_propagate(0)
         self.title = tk.StringVar()
         self.title.set('오늘 급식')
         self.dish =             tk.StringVar()
         self.cal =              tk.StringVar()
         self.dish.set(lunch_data.dish[0])
         self.cal.set(lunch_data.cal[0])
-        
-        sch.every().day.at("12:10").do(lambda: self.title.set('내일 급식'))
+        update_loop = asyncio.create_task(self.sche())
+
+        sch.every().day.at("12:10").do(lambda: self.title.set('다음 급식'))
         sch.every().monday.at("12:10").do(lambda: self.dish.set(lunch_data.dish[1]))
         sch.every().tuesday.at("12:10").do(lambda: self.dish.set(lunch_data.dish[1]))
         sch.every().wednesday.at("12:10").do(lambda: self.dish.set(lunch_data.dish[1]))
@@ -85,6 +86,11 @@ class TodayLunch(tk.Frame):
         dish_label.             grid(row=1, column=0)
         cal_label.              grid(row=2, column=0)
         self.                   config(relief='solid', bd=10, bg='white')
+
+    async def sche(self):
+        while True:
+            sch.run_pending()
+            await asyncio.sleep(0.01)
 
 
 
@@ -183,7 +189,7 @@ class Sensor(tk.Frame):
         self.update()
         self.config(bg='white')
         if rtSensor:
-            update_loop = asyncio.create_task(self.sche())
+
             sch.every(1).minute.do(self.update)
             '''
             sch.every().monday.at("08:40").do(self.wakeUp)
@@ -202,8 +208,6 @@ class Sensor(tk.Frame):
     def update(self):
         if rtSensor:
             data = ardu_sensor.getData()
-            print(data)
-            print('sensor updated!')
             data['temp'] = round(float(data['temp']), 1)
             data['humi'] = round(float(data['humi']), 1)
             self.temperature.set(data['temp'])
@@ -217,13 +221,6 @@ class Sensor(tk.Frame):
             self.fine.set('15')
             self.ultrafine.set('20')
             self.co2.set('421')
-
-    if rtSensor:
-        async def sche(self):
-            while True:
-                sch.run_pending()
-                await asyncio.sleep(0.01)
-
 
         def sleep(self):
             ardu_sensor.sleep()
