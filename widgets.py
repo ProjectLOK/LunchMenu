@@ -53,15 +53,16 @@ class TodayLunch(tk.Frame):
     def __init__(self, parent, *args, **kwargs):
         super(TodayLunch, self).__init__(parent, *args, **kwargs)
         self.title = tk.StringVar()
-        self.title.set('오늘 급식')
         self.dish =             tk.StringVar()
         self.cal =              tk.StringVar()
-        if int(time.strftime("%H%M")) > 1210:
+        if int(time.strftime("%H%M")) >= 1210:
             self.dish.set(lunch_data.dish[1])
             self.cal.set(lunch_data.cal[1])
+            self.title.set('다음 급식')
         else:
             self.dish.set(lunch_data.dish[0])
             self.cal.set(lunch_data.cal[0])
+            self.title.set('오늘 급식')
         update_loop = asyncio.create_task(self.sche())
 
         sch.every().day.at("12:10").do(lambda: self.title.set('다음 급식'))
