@@ -56,8 +56,12 @@ class TodayLunch(tk.Frame):
         self.title.set('오늘 급식')
         self.dish =             tk.StringVar()
         self.cal =              tk.StringVar()
-        self.dish.set(lunch_data.dish[0])
-        self.cal.set(lunch_data.cal[0])
+        if int(time.strftime("%H%M")) > 1210:
+            self.dish.set(lunch_data.dish[1])
+            self.cal.set(lunch_data.cal[1])
+        else:
+            self.dish.set(lunch_data.dish[0])
+            self.cal.set(lunch_data.cal[0])
         update_loop = asyncio.create_task(self.sche())
 
         sch.every().day.at("12:10").do(lambda: self.title.set('다음 급식'))
@@ -109,8 +113,12 @@ class NextdayLunch(tk.Frame):
         super(NextdayLunch, self).__init__(parent, *args, **kwargs)
         self.dish =             tk.StringVar()
         self.cal =              tk.StringVar()
-        self.dish.set(lunch_data.dish[1])
-        self.cal.set(lunch_data.cal[1])
+        if int(time.strftime("%H%M")) > 1210:
+            self.dish.set(lunch_data.dish[2])
+            self.cal.set(lunch_data.cal[2])
+        else:
+            self.dish.set(lunch_data.dish[1])
+            self.cal.set(lunch_data.cal[1])
 
         dish_font =             pack_font(fonts[class_name(self)]['dish'])
         cal_font =              pack_font(fonts[class_name(self)]['cal'])
