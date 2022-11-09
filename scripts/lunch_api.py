@@ -51,22 +51,17 @@ class lunch_api():
             code = self.data[0]['head'][1]['RESULT']['CODE']
             message = self.data[0]['head'][1]['RESULT']['MESSAGE']
             print('<API CALL SUCCESS> {}: {}'.format(code, message))
-            self.date = ['']*query['pSize']
             self.dish = ['']*query['pSize']
             self.cal = ['']*query['pSize']
             for i in range(query['pSize']):
                 try:
                     self.dish[i] = self.data[1]['row'][i]['DDISH_NM']
                     self.cal[i] = self.data[1]['row'][i]['CAL_INFO']
-                    self.date[i] = self.data[1]['row'][i]['MLSV_YMD']
                 except IndexError:
                     self.dish[i] = "정보가 없습니다."
                     self.cal[i] = "0"
-                    self.date[i] = datetime.strftime('%Y%m%d')
                 self.dish[i] = re.sub(r'[0-9*.<br>() ]+', '', self.dish[i])
                 self.dish[i] = re.sub(r'[/]+', '\n', self.dish[i])
-                
-                self.date[i] = self.date[i][4:6] + '.' + self.date[i][6:]
 
 if __name__ == "__main__":
     api = lunch_api()
