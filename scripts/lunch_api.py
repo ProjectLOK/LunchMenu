@@ -62,6 +62,10 @@ class lunch_api():
                     self.cal[i] = "0"
                 self.dish[i] = re.sub(r'[0-9*.<br>() ]+', '', self.dish[i])
                 self.dish[i] = re.sub(r'[/]+', '\n', self.dish[i])
+                try:
+                    self.dish[i] = self.dish[i][:self.dish[i].index("+")] + "\n" + self.dish[i][self.dish[i].index("+"):]
+                except ValueError:
+                    pass
 
 if __name__ == "__main__":
     api = lunch_api()
