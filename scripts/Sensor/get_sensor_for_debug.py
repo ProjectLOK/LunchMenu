@@ -18,7 +18,7 @@ if rtSensor:
         dataset = [''] * 6
         ardu.write(str.encode('update'))
         # time.sleep(0.1)
-        for i in range(6):
+        for i in range(5):
             #print(i)
             data = ardu.readline()  # read until ('\n')
             dataset[i] = data.decode('utf-8').rstrip()
@@ -29,5 +29,5 @@ if rtSensor:
 
 
     getData()
-    time.sleep(0.5)
+    time.sleep(1)
     getData()

@@ -194,7 +194,7 @@ class Sensor(tk.Frame):
         unit_ultrafine =        tk.Label(self,          text="μg/m³",                   font=unit_font,         justify=tk.RIGHT, bg='white')
         data_ultrafine =        tk.Label(self,          textvariable=self.ultrafine,    font=data_font,         justify=tk.LEFT, bg='white')
         lamp_ultrafine =        placeholder
-        category_co2 =          tk.Label(self,          text="CO₂",              font=category_font,     justify=tk.LEFT, bg='white')
+        category_co2 =          tk.Label(self,          text="Form",              font=category_font,     justify=tk.LEFT, bg='white')
         unit_co2 =              tk.Label(self,          text="ppm",                     font=unit_font,         justify=tk.RIGHT, bg='white')
         data_co2 =              tk.Label(self,          textvariable=self.co2,          font=data_font,         justify=tk.LEFT, bg='white')
         lamp_co2 =              placeholder
