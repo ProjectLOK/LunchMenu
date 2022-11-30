@@ -31,8 +31,8 @@
                 "overstrike": 0
             },
             "dish": {
-                "family": "Noto Sans KR Custom TodayMenu",
-                "size": 73,
+                "family": "Noto Sans KR",
+                "size": 68,
                 "weight": "BOLD",
                 "slant": "ROMAN",
                 "underline": 0,
@@ -49,7 +49,7 @@
         },
         "nextdaylunch": {
             "dish": {
-                "family": "Noto Sans KR",
+                "family": "Noto Sans KR Custom TodayMenu",
                 "size": 34,
                 "weight": "BOLD",
                 "slant": "ROMAN",
@@ -68,7 +68,7 @@
         "clock": {
             "date": {
                 "family": "Noto Sans KR Custom Date",
-                "size": 47,
+                "size": 40,
                 "weight": "BOLD",
                 "slant": "ROMAN",
                 "underline": 0,
@@ -76,7 +76,7 @@
             },
             "time": {
                 "family": "Noto Sans KR Custom Time",
-                "size": 126,
+                "size": 120,
                 "weight": "NORMAL",
                 "slant": "ROMAN",
                 "underline": 0,

@@ -55,7 +55,7 @@ class TodayLunch(tk.Frame):
         self.title = tk.StringVar()
         self.dish =             tk.StringVar()
         self.cal =              tk.StringVar()
-        if int(time.strftime("%H%M")) >= 1210:
+        if int(time.strftime("%H%M")) >= 1310:
             self.dish.set(lunch_data.dish[1])
             self.cal.set(lunch_data.cal[1])
             self.title.set('다음 급식')
@@ -65,17 +65,17 @@ class TodayLunch(tk.Frame):
             self.title.set('오늘 급식')
         update_loop = asyncio.create_task(self.sche())
 
-        sch.every().day.at("12:10").do(lambda: self.title.set('다음 급식'))
-        sch.every().monday.at("12:10").do(lambda: self.dish.set(lunch_data.dish[1]))
-        sch.every().tuesday.at("12:10").do(lambda: self.dish.set(lunch_data.dish[1]))
-        sch.every().wednesday.at("12:10").do(lambda: self.dish.set(lunch_data.dish[1]))
-        sch.every().thursday.at("12:10").do(lambda: self.dish.set(lunch_data.dish[1]))
-        sch.every().friday.at("12:10").do(lambda: self.dish.set(lunch_data.dish[1]))
-        sch.every().monday.at("12:10").do(lambda: self.cal.set(lunch_data.cal[1]))
-        sch.every().tuesday.at("12:10").do(lambda: self.cal.set(lunch_data.cal[1]))
-        sch.every().wednesday.at("12:10").do(lambda: self.cal.set(lunch_data.cal[1]))
-        sch.every().thursday.at("12:10").do(lambda: self.cal.set(lunch_data.cal[1]))
-        sch.every().friday.at("12:10").do(lambda: self.cal.set(lunch_data.cal[1]))
+        sch.every().day.at("13:10").do(lambda: self.title.set('다음 급식'))
+        sch.every().monday.at("13:10").do(lambda: self.dish.set(lunch_data.dish[1]))
+        sch.every().tuesday.at("13:10").do(lambda: self.dish.set(lunch_data.dish[1]))
+        sch.every().wednesday.at("13:10").do(lambda: self.dish.set(lunch_data.dish[1]))
+        sch.every().thursday.at("13:10").do(lambda: self.dish.set(lunch_data.dish[1]))
+        sch.every().friday.at("13:10").do(lambda: self.dish.set(lunch_data.dish[1]))
+        sch.every().monday.at("13:10").do(lambda: self.cal.set(lunch_data.cal[1]))
+        sch.every().tuesday.at("13:10").do(lambda: self.cal.set(lunch_data.cal[1]))
+        sch.every().wednesday.at("13:10").do(lambda: self.cal.set(lunch_data.cal[1]))
+        sch.every().thursday.at("13:10").do(lambda: self.cal.set(lunch_data.cal[1]))
+        sch.every().friday.at("13:10").do(lambda: self.cal.set(lunch_data.cal[1]))
 
         sch.every().day.at("00:00").do(lambda: self.title.set('오늘 급식'))
         sch.every().monday.at("00:01").do(lambda: self.dish.set(lunch_data.dish[0]))
@@ -267,7 +267,7 @@ class Clock(tk.Frame):
         font_date = pack_font(fonts[class_name(self)]['date'])
         font_time = pack_font(fonts[class_name(self)]['time'])
 
-        date_label =            tk.Label(self,          textvariable=self.date,         font=font_date, anchor='center', padx= 186, relief='solid', bd=0, bg='white')
+        date_label =            tk.Label(self,          textvariable=self.date,         font=font_date, anchor='center', padx= 110, relief='solid', bd=0, bg='white')
         time_label =            tk.Label(self,          textvariable=self.time,         font=font_time, anchor='center', relief='solid', bd=0, bg='white')
 
         date_label.             grid(row=0)
